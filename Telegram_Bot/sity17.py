@@ -55,10 +55,11 @@ def button(message):
 def selected_country(message):
     selected_country = message.text  # выбранная страна по нажатию кнопки из списка.
     print(selected_country)
+    print(type(selected_country))
 
-    # url_city = "http://htmlweb.ru/json/geo/city_list?country=Украина&api_key=a9d781a8d9c03224b95a996b1abe23e9"
-    # ExchangeRates = requests.get(url_city)
-    lists_city = api_c  # ExchangeRates.json()
+    url_city = "http://htmlweb.ru/json/geo/city_list?country="+selected_country+"&api_key="+API_key_sity
+    ExchangeRates = requests.get(url_city)
+    lists_city = ExchangeRates.json()
     print(lists_city)
     print(lists_city["name"])
 
