@@ -1,4 +1,4 @@
-Api_c = {'status': 200, 'items': [
+api_c = {'status': 200, 'items': [
     {'id': 2920, 'name': 'Дил', 'area': 179, 'telcod': 3803146, 'latitude': 48.5672, 'longitude': 23.4297,
      'time_zone': 2, 'english': 'Ukr dl', 'rajon': 275, 'country': 'UA', 'level': 0, 'vid': 0, 'post': '',
      'full_name': 'Дил (Украина, Закарпатская область, Межгорский)',

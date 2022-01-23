@@ -14,7 +14,7 @@ print(lists)
 List_of_countries = []
 request_c = 0
 match_by_country = []
-
+list_city = []
 for dicts in lists:
     try:
         countries = lists[dicts]['name']
@@ -56,12 +56,16 @@ def selected_country(message):
     selected_country = message.text  # выбранная страна по нажатию кнопки из списка.
     print(selected_country)
 
-
-    url_city = "http://htmlweb.ru/json/geo/city_list?country=Украина&api_key=a9d781a8d9c03224b95a996b1abe23e9"
-    ExchangeRates = requests.get(url_city)
-    lists_city = ExchangeRates.json()
+    # url_city = "http://htmlweb.ru/json/geo/city_list?country=Украина&api_key=a9d781a8d9c03224b95a996b1abe23e9"
+    # ExchangeRates = requests.get(url_city)
+    lists_city = api_c  # ExchangeRates.json()
     print(lists_city)
-    print(type(lists_city))
+    print(lists_city["name"])
 
+
+for city_information in list:
+    list_city.append(city_information['name'])
+    list_city.sort()  # Сортируем по алфавиту для удобства
+print(list_city)
 
 mybot.polling()
