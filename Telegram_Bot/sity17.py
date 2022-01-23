@@ -2,6 +2,7 @@ import requests
 import telebot
 from telebot import types
 from Api_sity import api_s
+from Api_coutrice import api_c
 
 API_key_sity = "a9d781a8d9c03224b95a996b1abe23e9"
 TOKENBOT = "2104027065:AAGlDLPCPWs9XNEhtKENexp7Dj_sTAA0RBk"
@@ -56,10 +57,11 @@ def selected_country(message):
     print(selected_country)
 
 
-    url_city = "http://htmlweb.ru/json/geo/city_list?country=selected_country&api_key=a9d781a8d9c03224b95a996b1abe23e9"
+    url_city = "http://htmlweb.ru/json/geo/city_list?country=Украина&api_key=a9d781a8d9c03224b95a996b1abe23e9"
     ExchangeRates = requests.get(url_city)
     lists_city = ExchangeRates.json()
     print(lists_city)
+    print(type(lists_city))
 
 
 mybot.polling()
