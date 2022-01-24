@@ -7,7 +7,7 @@ from Api_coutrice import api_c
 API_key_sity = "a9d781a8d9c03224b95a996b1abe23e9"
 TOKENBOT = "2104027065:AAGlDLPCPWs9XNEhtKENexp7Dj_sTAA0RBk"
 mybot = telebot.TeleBot(TOKENBOT)
-url_countries = "http://htmlweb.ru/geo/api.php?location&json&api_key=API_key_sity" #Списог стран.
+url_countries = "http://htmlweb.ru/geo/api.php?location&json&api_key=API_key_sity"  # Списог стран.
 ExchangeRates = requests.get(url_countries)
 lists = ExchangeRates.json()
 print(lists)
@@ -27,7 +27,7 @@ for dicts in lists:
 def start(message):
     mybot.send_message(message.chat.id, 'Введите название страны, можно не полностью.')
     mybot.register_next_step_handler(message, country_request)
-    mybot.register_next_step_handler(message, button)
+    mybot.register_next_step_handler(message, button_coutris)
 
 
 def country_request(message):
@@ -43,7 +43,7 @@ def countries():
             match_by_country.append(i)
 
 
-def button(message):
+def button_coutris(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
     for count_button in match_by_country:
         button_с = types.KeyboardButton(text=count_button)
@@ -57,7 +57,7 @@ def selected_country(message):
     selected_country = message.text  # выбранная страна по нажатию кнопки из списка.
     print(selected_country)
 
-    url_city = "http://htmlweb.ru/json/geo/city_list?country=" + selected_country + "&api_key=" + API_key_sity #Список городов выбраной страны
+    url_city = "http://htmlweb.ru/json/geo/city_list?country=" + selected_country + "&api_key=" + API_key_sity  # Список городов выбраной страны
     ExchangeRates = requests.get(url_city)
     list_city = ExchangeRates.json()
     print(list_city)
@@ -68,7 +68,12 @@ def selected_country(message):
     print(list_c)
 
 
-
+@mybot.message_handler(content_types=['text'])
+def button_city(message):
+    keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+    for count_button2 in list_c:
+        button_сit = types.KeyboardButton(text=count_button2)
+        keyboard.add(button_сit)
 
 
 mybot.polling()
