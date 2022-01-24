@@ -7,14 +7,14 @@ from Api_coutrice import api_c
 API_key_sity = "a9d781a8d9c03224b95a996b1abe23e9"
 TOKENBOT = "2104027065:AAGlDLPCPWs9XNEhtKENexp7Dj_sTAA0RBk"
 mybot = telebot.TeleBot(TOKENBOT)
-url_countries = "http://htmlweb.ru/geo/api.php?location&json&api_key=API_key_sity"
+url_countries = "http://htmlweb.ru/geo/api.php?location&json&api_key=API_key_sity" #Списог стран.
 ExchangeRates = requests.get(url_countries)
 lists = ExchangeRates.json()
 print(lists)
 List_of_countries = []
 request_c = 0
 match_by_country = []
-list_city = []
+list_c = []
 for dicts in lists:
     try:
         countries = lists[dicts]['name']
@@ -53,20 +53,22 @@ def button(message):
 
 
 def selected_country(message):
+    global list_c
     selected_country = message.text  # выбранная страна по нажатию кнопки из списка.
     print(selected_country)
-    print(type(selected_country))
 
-    url_city = "http://htmlweb.ru/json/geo/city_list?country="+selected_country+"&api_key="+API_key_sity
+    url_city = "http://htmlweb.ru/json/geo/city_list?country=" + selected_country + "&api_key=" + API_key_sity #Список городов выбраной страны
     ExchangeRates = requests.get(url_city)
-    lists_city = ExchangeRates.json()
-    print(lists_city)
-    print(lists_city["name"])
+    list_city = ExchangeRates.json()
+    print(list_city)
+    list2 = list_city['items']
+    for city_information in list2:
+        list_c.append(city_information['name'])
+        list_c.sort()  # Сортируем по алфавиту для удобства
+    print(list_c)
 
 
-for city_information in list:
-    list_city.append(city_information['name'])
-    list_city.sort()  # Сортируем по алфавиту для удобства
-print(list_city)
+
+
 
 mybot.polling()
