@@ -74,6 +74,7 @@ def button_city(message):
     for count_button2 in list_c:
         button_сit = types.KeyboardButton(text=count_button2)
         keyboard.add(button_сit)
+    mybot.send_message(message.chat.id, ' ', reply_markup=keyboard)
 
 
 mybot.polling()
