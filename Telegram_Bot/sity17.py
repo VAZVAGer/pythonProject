@@ -4,10 +4,11 @@ from telebot import types
 from Api_sity import api_s
 from Api_coutrice import api_c
 
-API_key_sity = "a9d781a8d9c03224b95a996b1abe23e9"
-TOKENBOT = "2104027065:AAGlDLPCPWs9XNEhtKENexp7Dj_sTAA0RBk"
+TOKEN_openweathermap = 'e90957fbf95d9bcccb813873bc49c13c'  # Ключ погоды
+API_key_sity = "a9d781a8d9c03224b95a996b1abe23e9"  # Ключ стран и городов
+TOKENBOT = "2104027065:AAGlDLPCPWs9XNEhtKENexp7Dj_sTAA0RBk"  # Ключ Телеграм бота
 mybot = telebot.TeleBot(TOKENBOT)
-url_countries = "http://htmlweb.ru/geo/api.php?location&json&api_key=API_key_sity"  # Списог стран.
+url_countries = "http://htmlweb.ru/geo/api.php?location&json&api_key=API_key_sity"  # Список стран.
 ExchangeRates = requests.get(url_countries)
 lists = ExchangeRates.json()
 print(lists)
@@ -15,6 +16,7 @@ List_of_countries = []
 request_c = 0
 match_by_country = []
 list_c = []
+weather_data=[]
 for dicts in lists:
     try:
         countries = lists[dicts]['name']
@@ -68,13 +70,52 @@ def selected_country(message):
     print(list_c)
 
 
-@mybot.message_handler(content_types=['text'])
+@mybot.message_handler(commands=['с'])
 def button_city(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
     for count_button2 in list_c:
         button_сit = types.KeyboardButton(text=count_button2)
         keyboard.add(button_сit)
-    mybot.send_message(message.chat.id, ' ', reply_markup=keyboard)
+    mybot.send_message(message.chat.id, 'Выберете город, что бы получить прогноз погоды:', reply_markup=keyboard)
+    mybot.register_next_step_handler(message, selected_city)
+
+
+def selected_city(message):
+    global weather_data
+    selected_country = message.text  # выбранный город по нажатию кнопки из списка.
+    print(selected_country)
+    response = requests.get(
+        'http://api.openweathermap.org/data/2.5/weather?q=' + selected_country + '&appid=' + TOKEN_openweathermap)
+    weather_data = response.json()
+    print(weather_data)
+    weather(message)
+
+
+def description():  # Дождь, туман и тд.
+    a = weather_data['weather']
+    b = (a[0])
+    des = b['description']
+    return (des)
+
+
+def temp():  # Температура.
+    tm = weather_data['main']['temp']
+    return (tm)
+
+
+def wind():  # Скорость вветра.
+    sp = weather_data['wind']['speed']
+    return (sp)
+
+
+def location():  # Локация.
+    loc = weather_data['name']
+    return (loc)
+
+
+def weather(message):
+    mybot.send_message(message.chat.id, "Вы тут:  " + location() + "." + "\n" + "Температура: " + str(
+        (temp())) + " С." + "\n" + "Ветер: " + str((wind())) + " м/с." + "\n" + description())
 
 
 mybot.polling()
