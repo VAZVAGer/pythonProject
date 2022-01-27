@@ -85,7 +85,7 @@ def selected_city(message):
     selected_country = message.text  # выбранный город по нажатию кнопки из списка.
     print(selected_country)
     response = requests.get(
-        'http://api.openweathermap.org/data/2.5/weather?q=' + selected_country + '&appid=' + TOKEN_openweathermap)
+        'http://api.openweathermap.org/data/2.5/weather?q=' + selected_country + '&units=metric&appid=' + TOKEN_openweathermap)
     weather_data = response.json()
     print(weather_data)
     weather(message)
