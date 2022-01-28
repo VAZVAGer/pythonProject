@@ -16,7 +16,7 @@ List_of_countries = []
 request_c = 0
 match_by_country = []
 list_c = []
-weather_data=[]
+weather_data = []
 for dicts in lists:
     try:
         countries = lists[dicts]['name']
@@ -25,7 +25,7 @@ for dicts in lists:
         pass
 
 
-@mybot.message_handler(commands=['start'])
+@mybot.message_handler(commands=['start'])  # Запускает бота.
 def start(message):
     mybot.send_message(message.chat.id, 'Введите название страны, можно не полностью.')
     mybot.register_next_step_handler(message, country_request)
@@ -34,18 +34,18 @@ def start(message):
 
 def country_request(message):
     global request_c
-    request_c = message.text  # Воовд названия страны которую ищу или части ее названия.
+    request_c = message.text.lower()  # Воовд названия страны которую ищу или части ее названия.
     countries()
 
 
-def countries():
+def countries():  # Формируется список стран.
     global match_by_country
     for i in List_of_countries:
         if request_c in i:
             match_by_country.append(i)
 
 
-def button_coutris(message):
+def button_coutris(message):  # Получаем кнопки со странами.
     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
     for count_button in match_by_country:
         button_с = types.KeyboardButton(text=count_button)
@@ -68,10 +68,6 @@ def selected_country(message):
         list_c.append(city_information['name'])
         list_c.sort()  # Сортируем по алфавиту для удобства
     print(list_c)
-
-
-@mybot.message_handler(commands=['с'])
-def button_city(message):
     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
     for count_button2 in list_c:
         button_сit = types.KeyboardButton(text=count_button2)
