@@ -11,7 +11,7 @@ mybot = telebot.TeleBot(TOKENBOT)
 url_countries = "http://htmlweb.ru/geo/api.php?location&json&api_key=API_key_sity"  # Список стран.
 ExchangeRates = requests.get(url_countries)
 lists = ExchangeRates.json()
-print(lists) # Вывод содержимого API стран.
+print(lists)  # Вывод содержимого API стран.
 List_of_countries = []
 request_c = 0
 match_by_country = []
@@ -35,15 +35,13 @@ def start(message):
 def country_request(message):
     global request_c
     request_c = message.text.lower()  # Воовд названия страны которую ищу или части ее названия.
-    countries()
-
-
-def countries():  # Формируется список стран.
     global match_by_country
     for i in List_of_countries:
         if request_c in i.lower():
             match_by_country.append(i)
-
+        else:
+            mybot.send_message(message.chat.id, "Запрос введен не верно!\nHачните заново отправив '/start'" )
+            return
 
 def button_coutris(message):  # Получаем кнопки со странами.
     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
@@ -57,17 +55,17 @@ def button_coutris(message):  # Получаем кнопки со страна�
 def selected_country(message):
     global list_c
     selected_country = message.text  # выбранная страна по нажатию кнопки из списка.
-    print(selected_country) # Вывод выбранной страны.
+    print(selected_country)  # Вывод выбранной страны.
 
     url_city = "http://htmlweb.ru/json/geo/city_list?country=" + selected_country + "&api_key=" + API_key_sity  # Список городов выбраной страны
     ExchangeRates = requests.get(url_city)
     list_city = ExchangeRates.json()
-    print(list_city) # Вывод API городов.
+    print(list_city)  # Вывод API городов.
     list2 = list_city['items']
     for city_information in list2:
         list_c.append(city_information['name'])
         list_c.sort()  # Сортируем по алфавиту для удобства
-    print(list_c) # Вывод списка городов выбраной страны.
+    print(list_c)  # Вывод списка городов выбраной страны.
     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
     for count_button2 in list_c:
         button_сit = types.KeyboardButton(text=count_button2)
