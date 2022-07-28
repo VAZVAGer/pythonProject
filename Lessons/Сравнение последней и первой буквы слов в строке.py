@@ -1,5 +1,3 @@
-# n, m = map(int, input().split())
-# cities = list(map(str, input().split()))
 cities = ['Москва', 'Астрахань', 'Новгород', 'Димитровград', 'Душанбе']
 initial = []
 final_letter = [111]
