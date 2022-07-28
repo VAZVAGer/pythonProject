@@ -1,10 +1,16 @@
 # n, m = map(int, input().split())
-# city = list(map(str, input().split()))
-p = [0] * 10
-input_number = 1
+# cities = list(map(str, input().split()))
+cities = ['Москва', 'Астрахань', 'Новгород', 'Димитровград', 'Душанбе']
+initial = [111]
+final_letter = []
+for citie in cities:
+    initial.append(citie[0].lower())
 
-while input_number <= 10:
-    list_element_index = int(input("Введите индекс элемента списка от 0 до 9:"))
-    p[list_element_index] = 1
-    input_number += 1
-print(p)
+    if citie[-1].lower() == 'ь' or citie[-1].lower() == 'ъ' or citie[-1].lower() == 'ы':
+        final_letter.append(citie[-2].lower())
+    else:
+        final_letter.append(citie[-1].lower())
+
+
+print(initial)
+print(final_letter)
