@@ -5,7 +5,6 @@ matrix = [[1, 0, 0, 0, 0],
           [0, 0, 0, 0, 0]]
 list_of_neighbors = []
 for ind_str, mea_str in enumerate(matrix):
-
     for ind_line, mea_line in enumerate(mea_str):
         if mea_line == 1:
             try:
