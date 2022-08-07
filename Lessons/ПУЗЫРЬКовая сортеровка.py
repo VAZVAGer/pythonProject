@@ -1,6 +1,3 @@
-# n, m = map(int, input().split())
-# words = list(map(str, input().split()))
-# lst_in = list(map(str.strip, sys.stdin.readlines()))
 matrix = [4, 5, 2, 0, 6, 3, -56, 3, -1]
 ind = len(matrix)
 n = 0
