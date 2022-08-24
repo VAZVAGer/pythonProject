@@ -3,8 +3,16 @@
 # text = tuple(map(str, input().split()))
 def get_data_fig(*args, **kwargs):
     s = sum(args)
-    lst = (kwargs["type"], kwargs['color'], kwargs['closed'], kwargs['width'])
+    lst = [kwargs["type"], kwargs['color'], kwargs['closed'], kwargs['width']]
+    if "type" not in kwargs:
+        lst[0] = ''
+    if "color" not in kwargs:
+        lst[1] = ''
+    if 'closed' not in kwargs:
+        lst[2] = ''
+    if 'width' not in kwargs:
+        lst[3] = ''
     print(s, lst)
 
 
-get_data_fig(15, 5, 3, color=25, type=True, width=111, closed=False)
+get_data_fig(15, 5, 3, color=25, type=True, closed=False)
