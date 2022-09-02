@@ -1,18 +1,24 @@
 # n, m = map(int, input().split())
 # lst_in = list(map(str.strip, sys.stdin.readlines()))
 # velue = list(map(int, input().split()))
+s = "Главная Добавить Удалить Выйти"
 
 
-def fib_rec(N, f=[]):
-    if N >1000:
-        N = 1000
-    if f == []:
-        f = [1, 1]
-        N = N - 2
-    f.append(f[-1] + f[-2])
+def show_menu(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        n = 1
+        for val in result:
+            print(f'{n}.{val}')
+            n += 1
 
-    if N != 1:
-        fib_rec(N - 1, f)
-    return f
+    return wrapper
 
-print(*fib_rec(2000))
+
+@show_menu
+def get_list(s):
+    lst_in = list(map(int, s.split()))
+    return lst_in
+
+
+get_menu(s)
