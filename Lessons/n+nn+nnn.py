@@ -8,4 +8,4 @@ def solve(n, a):
 
 
 solve(2, 3)
-print (sum(sp))
+print (sum(sp))+int(b)+int(n))
