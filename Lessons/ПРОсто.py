@@ -1,25 +1,36 @@
-# n, m = map(int, input().split())
-# lst_in = list(map(str.strip, sys.stdin.readlines()))
-# velue = list(map(int, input().split()))
+morze_dict = {'ё': 'yo', 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'zh',
+              'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p',
+              'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
+              'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya' , 'П': 'p'}
 
 
-def sort(func):
-    def wrapper(*args, **kwargs):
-        result = func(*args, **kwargs)
-        d = {result[0][0]: result[1][0], result[0][1]: result[1][1], result[0][2]: result[1][2],
-             result[0][3]: result[1][3]}
-        return d
+def Cleaner(func):
+    def wrapper(s):
+        if "--" in func(s):
+            while func(s).count('--'):
+                s = func(s).replace('--', '-')
+                st = str(s).strip("-")
+            return st
+        else:
+            return func(s)
 
     return wrapper
 
 
-@sort
-def get_list(s1, s2):
-    lst_in1 = list(map(str, s1.split()))
-    lst_in2 = list(map(str, s2.split()))
-    lst_in3 = [lst_in1, lst_in2]
-    return lst_in3
+@Cleaner
+def interpreter(text):
+    translation = []
+
+    for letter in text:
+        if letter in ": ;.,_":
+            translation.append('-')
+        elif letter in morze_dict:
+            translation.append(morze_dict[letter.lower()])
+        else:
+            translation.append(letter.lower())
+    return "".join(translation)
 
 
-d = get_list(input(), input())
-print(*sorted(d.items()))
+s = input()
+
+print(interpreter(s))
