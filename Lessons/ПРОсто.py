@@ -1,19 +1,39 @@
 # list1 = list(map(int, input().split()))
 # a, b = map(int, input().split())
 
+from string import ascii_lowercase, ascii_uppercase
+import random
+
 N = int(input())
 
 
-def Balakirev_sequence():
-    a, b, c = 1, 1, 1
-    for i in range(N):
-        if i < 1:
-            yield 1
-        else:
-            a, b, c, = b, c, a + b + c
-            yield a
+def password_generator(number_of_digits):
+    chars = ascii_lowercase + ascii_uppercase + "0123456789!?@#$*"
+    N = 0
+    while N <= number_of_digits - 1:
+        random.seed()
+        indx = random.randint(0, len(chars) - 1)
+        N += 1
+        yield chars[indx]
 
 
-d = Balakirev_sequence()
-for i in d:
-    print(i, end=" ")
+s = password_generator(N)
+for x in s:
+    print(x, end="")
+print()
+s = password_generator(N)
+for x in s:
+    print(x, end="")
+print()
+s = password_generator(N)
+for x in s:
+    print(x, end="")
+print()
+s = password_generator(N)
+for x in s:
+    print(x, end="")
+print()
+s = password_generator(N)
+for x in s:
+    print(x, end="")
+print()
