@@ -11,3 +11,6 @@ zi = zip(s, N)
 for i in zi:
     lst.append(i)
 print(lst)
+
+def myCoolAlg():
+    return 1
