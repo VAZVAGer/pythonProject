@@ -8,12 +8,14 @@ di = {}
 for zn in lst_in:
     lst = zn.split(":")
     di[int(lst[-1])] = lst[0]
-print(di)
+
 
 
 def cheap(dict):
     ds = sorted(dict.items(), reverse=False)
-    print(ds)
+    sr = ds[:3]
+    for zn in sr:
+        print(zn[-1], end=" ")
 
 
 cheap(di)
