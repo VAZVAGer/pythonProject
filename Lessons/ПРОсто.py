@@ -6,6 +6,11 @@ lst_in = ['Номер;Имя;Оценка;Зачет', '1;Портос;5;Да', 
 lst_in2 = []
 for zn in lst_in:
     a = zn.split(";")
-
-    print(a)
+    try:
+        a[0] = int(a[0])
+        a[2] = int(a[2])
+    except:
+        pass
+    lst_in2.append(a)
+print(lst_in2)
 
