@@ -15,8 +15,14 @@ class DataBase:
 
     def insert(self, data):  #для добавления в список lst_data новых данных из переданного списка строк data;
         self.data_in = data
-        for zn in self.data_in:
-            zn.split(" ")
+        for velue in self.data_in:
+            data = velue.split(" ")
+            print(data)
+            dic = {}
+            for index, velue2 in enumerate(data):
+                dic[self.FIELDS[index]] = velue2
+            lst_in.append(dic)
+
 
 
 
