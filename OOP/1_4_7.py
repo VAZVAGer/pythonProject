@@ -15,11 +15,9 @@ class StreamReader:
     FIELDS = ('id', 'title', 'pages')
 
     def readlines(self):
-        lst_in = list(map(str.strip, sys.stdin.readlines()))
-        #print(lst_in)# считывание списка строк из входного потока
+        lst_in = list(map(str.strip, sys.stdin.readlines())) # считывание списка строк из входного потока
         sd = StreamData()
-        res = sd.create(self.FIELDS, lst_in)
-        print(res)
+        res = sd.create(self.FIELDS, lst_in) # Вызываем метод create, передавая в него кортеж и список.
         return sd, res
 
 
