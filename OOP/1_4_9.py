@@ -9,20 +9,18 @@ class DataBase:
     lst_data = []
     FIELDS = ('id', 'name', 'old', 'salary')
 
-    def select(self, a, b):     # возвращает список из элементов списка lst_data в диапазоне [a; b] (включительно) по их индексам
-                                # (не id, а индексам списка); также учесть, что граница b может превышать длину списка.
-        return self.lst_data[a:b + 1]
-
     def insert(self, data):  #для добавления в список lst_data новых данных из переданного списка строк data;
         self.data_in = data
         for velue in self.data_in:
             data = velue.split(" ")
-            print(data)
             dic = {}
             for index, velue2 in enumerate(data):
                 dic[self.FIELDS[index]] = velue2
-            lst_in.append(dic)
-
+            self.lst_data.append(dic)
+    def select(self, a, b):
+        self.a = a
+        self.b = b
+        return self.lst_data[a:b + 1]
 
 
 
