@@ -1,7 +1,7 @@
 class Translator:
-    DICT = {}
-
     def add(self, eng, rus):
+        if "DICT" not in self.__dict__:
+            self.DICT = {}
         self.eng = eng
         self.rus = rus
         if self.eng in self.DICT and self.rus not in self.DICT[self.eng]:
@@ -15,7 +15,7 @@ class Translator:
 
     def translate(self, eng):
         self.eng = eng
-        print(*self.DICT[self.eng])
+        return self.DICT[self.eng]
 
 
 tr = Translator()
@@ -29,5 +29,5 @@ tr.add("go", "ехать")
 tr.add("go", "ходить")
 tr.add("milk", "молоко")
 tr.remove("car")
-tr.translate("go")
-tr.translate("tree")[0]
+print(*tr.translate("go"))
+
