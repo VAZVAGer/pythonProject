@@ -18,7 +18,6 @@ class Ellipse:
         self.sp = (a, b)
         self.ep = (c, d)
 
-
 a, b, c, d = random.sample(range(0, 101), 4)
 elements = [random.choice([Line, Rect, Ellipse])(a, b, c, d) for n in range(217)]
 
