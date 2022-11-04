@@ -6,7 +6,8 @@ class Cart:
         self.goods.append(gd)
 
     def remove(self, indx):
-        self.goods.remove(indx)
+        vel = self.goods[indx]
+        self.goods.remove(vel)
 
     def get_list(self):
         return ['<наименовние_1>: <цена_1>',
