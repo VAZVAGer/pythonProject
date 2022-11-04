@@ -1,7 +1,7 @@
 class CPU:
     def __init__(self, name, fr):
         self.name = name
-        self.tr = fr
+        self.fr = fr
 
 
 class Memory:
@@ -21,7 +21,7 @@ class MotherBoard:
         return [f'Материнская плата: {self.name}',
                 f'Центральный процессор: {self.cpu.name}, {self.cpu.fr}',
                 f'Слотов памяти: {self.total_mem_slots}',
-                'Память:' + ';'.join(map(lambda x: f'{x.neme} - {x.volom}', self.mem_slots))]
+                'Память:' + ';'.join(map(lambda x: f'{x.name} - {x.volume}', self.mem_slots))]
 
 
-mb = MotherBoard("ASUS", CPU("Intel", 2000), Memory('kingston', 8), Memory('kingston', 8))
+mb = MotherBoard("ASUS", CPU("Intel", 2000), Memory('Kingston',8), Memory('Kingston',8))
