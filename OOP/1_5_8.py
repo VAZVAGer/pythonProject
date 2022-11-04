@@ -10,10 +10,7 @@ class Cart:
         self.goods.remove(vel)
 
     def get_list(self):
-        return ['<наименовние_1>: <цена_1>',
-                '<наименовние_2>: <цена_2>',
-                ...
-                '<наименовние_N>: <цена_N>']
+        print(self.goods)
 
 
 class Table:
@@ -38,3 +35,7 @@ class Cup:
     def __init__(self, name, price):
         self.name = name
         self.price = price
+
+cart = Cart(TV("LG", 1200), TV("Samsung", 18000), Table("Кухонный", 1600), Notebook('Asus', 77000), Notebook("Asus", 96500), Cup("Из нержи", 50))
+
+cart.get_list()
