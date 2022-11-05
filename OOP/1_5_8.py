@@ -10,7 +10,7 @@ class Cart:
         self.goods.remove(vel)
 
     def get_list(self):
-        print(self.goods)
+        print([f'{x.name}: {x.price}' for x in self.goods])
 
 
 class Table:
@@ -36,6 +36,13 @@ class Cup:
         self.name = name
         self.price = price
 
-cart = Cart(TV("LG", 1200), TV("Samsung", 18000), Table("Кухонный", 1600), Notebook('Asus', 77000), Notebook("Asus", 96500), Cup("Из нержи", 50))
+
+cart = Cart()
+cart.add(TV("LG", 1200))
+cart.add(TV("Samsung", 18000))
+cart.add(Table("Кухонный", 1600))
+cart.add(Notebook('Asus', 77000))
+cart.add(Notebook("Asus", 96500))
+cart.add(Cup("Из нержи", 50))
 
 cart.get_list()
