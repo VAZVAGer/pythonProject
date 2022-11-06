@@ -1,5 +1,5 @@
-dict_1 = {"go": ["идти"]}
-dict_1["go"].append("2222")
+import sys
 
-print(dict_1["go"])
 
+lst_in = list(map(str.strip, sys.stdin.readlines()))
+print(lst_in)
