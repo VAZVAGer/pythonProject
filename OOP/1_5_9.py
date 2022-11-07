@@ -4,7 +4,7 @@ class ListObject:
         self.next_obj = None
 
     def link(self, obj):
-        obj.next_obj = self
+        self.next_obj = obj
 
 
 lst_in = ['1. Первые шаги в ООП', '1.1 Как правильно проходить этот курс', '1.2 Концепция ООП простыми словами',
@@ -13,6 +13,9 @@ lst_in = ['1. Первые шаги в ООП', '1.1 Как правильно �
           '1.7 Методы класса (classmethod) и статические методы (staticmethod)']
 
 head_obj = ListObject(lst_in[0])
-for index, zn in enumerate(lst_in):
-    obj = ListObject(zn)
+obj = head_obj
+for index in range(1, len(lst_in)):
+    obj_new = ListObject(lst_in[index])
+    obj.link(obj_new)
+    odj = obj_new
 
