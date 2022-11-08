@@ -6,6 +6,8 @@ class Cell:
 
 
 class GamePole:
-    def __init__(self,N, M):
+
+    def __init__(self, N, M):
         self.N = N  # Размер поля
         self.M = M  # Общее число мин на поле.
+        self.pole = [[Cell() for i in range(N)] for j in range(N)]
