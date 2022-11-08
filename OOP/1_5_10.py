@@ -10,4 +10,11 @@ class GamePole:
     def __init__(self, N, M):
         self.N = N  # Размер поля
         self.M = M  # Общее число мин на поле.
-        self.pole = [[Cell() for i in range(N)] for j in range(N)]
+        self.pole = [['#' for i in range(N)] for j in range(N)]  #Создание пустого поля N*N
+
+    def showe(self):
+        print(self.pole)
+
+gp = GamePole(3, 0)
+
+gp.showe()
