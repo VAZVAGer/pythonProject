@@ -13,23 +13,29 @@ class GamePole:
     def __init__(self, N, M):
         self.N = N  # Размер поля
         self.M = M  # Общее число мин на поле.
-        self.pole = [['#' for i in range(N)] for j in range(N)]  # Создание пустого поля N*N
+        self.pole = []
 
     def init(self):
-        object_list_mines = [True] * self.M
-        object_list = [False] * ((self.N * self.N) - self.M)
-        object_list = object_list + object_list_mines
-        random.shuffle(object_list)
-        for mi in object_list:
-            obj = Cell(0, mi)
+        parameter_list_mines = [True] * self.M
+        parameter_list = [False] * ((self.N * self.N) - self.M)
+        parameter_list = parameter_list + parameter_list_mines
+        random.shuffle(parameter_list)
+        for i, mine in enumerate(parameter_list):
+            obj = Cell(0, mine)
+            parameter_list.insert(i, obj)
+            parameter_list.remove(mine)
+        c = 0
+        empty_field = [[0] * self.N for i in range(self.N)]
+        for i in range(self.N):
+            for j in range(self.N):
+                empty_field[i][j] = parameter_list[c]
+                c += 1
+        print(empty_field)
 
-    def showe(self):
+    def show(self):
         print(self.pole)
 
 
-
-
-gp = GamePole(4, 0)
-
-gp.showe()
+gp = GamePole(2, 1)
+gp.init()
 
