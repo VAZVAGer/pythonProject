@@ -38,8 +38,11 @@ class GamePole:
             for j in i:
                 if j.fl_open == False:
                     show_list.append("#")
-                elif j.fl_open == True and j.mine:
+                elif j.fl_open == True and j.mine == True:
                     show_list.append("*")
+                else:
+                    show_list.append(self.around_mines)
+
         c = 0
         show_pole = [[0] * self.N for i in range(self.N)]
         for i in range(self.N):
