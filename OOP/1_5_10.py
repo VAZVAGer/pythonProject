@@ -30,12 +30,24 @@ class GamePole:
             for j in range(self.N):
                 empty_field[i][j] = parameter_list[c]
                 c += 1
-        print(empty_field)
+        self.pole = empty_field
 
     def show(self):
-        print(self.pole)
+        show_list = []
+        for i in self.pole:
+            for j in i:
+                if j.mine == False:
+                    show_list.append("#")
+                else:
+                    show_list.append("*")
+        c = 0
+        show_pole = [[0] * self.N for i in range(self.N)]
+        for i in range(self.N):
+            for j in range(self.N):
+                show_pole[i][j] = show_list[c]
+                c += 1
+        print(*show_pole, sep="\n")
 
-
-gp = GamePole(2, 1)
+gp = GamePole(10, 12)
 gp.init()
-
+gp.show()
