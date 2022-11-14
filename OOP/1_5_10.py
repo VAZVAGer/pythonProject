@@ -30,18 +30,78 @@ class GamePole:
             for j in range(self.N):
                 empty_field[i][j] = parameter_list[c]
                 c += 1
+        for ind_str, mea_str in enumerate(empty_field):
+            for ind_line, mea_line in enumerate(mea_str):
+                if mea_line.mine == True:
+                    try:
+                        if ind_str - 1 == -1 or ind_line - 1 == -1:
+                            pass
+                        else:
+                            empty_field[ind_str - 1][ind_line - 1].around_mines += 1
+                    except:
+                        pass
+                    try:
+                        if ind_str - 1 == -1 or ind_line == -1:
+                            pass
+                        else:
+                            empty_field[ind_str - 1][ind_line].around_mines += 1
+                    except:
+                        pass
+                    try:
+                        if ind_str - 1 == -1 or ind_line + 1 == -1:
+                            pass
+                        else:
+                            empty_field[ind_str - 1][ind_line + 1].around_mines += 1
+                    except:
+                        pass
+                    try:
+                        if ind_str == -1 or ind_line - 1 == -1:
+                            pass
+                        else:
+                            empty_field[ind_str][ind_line - 1].around_mines += 1
+                    except:
+                        pass
+                    try:
+                        if ind_str == -1 or ind_line + 1 == -1:
+                            pass
+                        else:
+                            empty_field[ind_str][ind_line + 1].around_mines += 1
+                    except:
+                        pass
+                    try:
+                        if ind_str + 1 == -1 or ind_line - 1 == -1:
+                            pass
+                        else:
+                            empty_field[ind_str + 1][ind_line - 1].around_mines += 1
+                    except:
+                        pass
+                    try:
+                        if ind_str + 1 == -1 or ind_line == -1:
+                            pass
+                        else:
+                            empty_field[ind_str + 1][ind_line].around_mines += 1
+                    except:
+                        pass
+                    try:
+                        if ind_str + 1 == -1 or ind_line + 1 == -1:
+                            pass
+                        else:
+                            empty_field[ind_str + 1][ind_line + 1].around_mines += 1
+                    except:
+                        pass
+
         self.pole = empty_field
 
     def show(self):
         show_list = []
         for i in self.pole:
             for j in i:
-                if j.fl_open == False:
+                if j.fl_open == False: # заменить потом на False
                     show_list.append("#")
-                elif j.fl_open == True and j.mine == True:
+                elif j.fl_open == False and j.mine == True:
                     show_list.append("*")
                 else:
-                    show_list.append(self.around_mines)
+                    show_list.append(j.around_mines)
 
         c = 0
         show_pole = [[0] * self.N for i in range(self.N)]
@@ -50,6 +110,7 @@ class GamePole:
                 show_pole[i][j] = show_list[c]
                 c += 1
         print(*show_pole, sep="\n")
+
 
 gp = GamePole(10, 12)
 gp.init()

@@ -63,6 +63,7 @@ for ind_str, mea_str in enumerate(matrix):
                     list_of_neighbors.append(matrix[ind_str + 1][ind_line + 1])
             except:
                 pass
+
 yes_or_not = 1 in list_of_neighbors
 if yes_or_not == False:
     print("ДА")
