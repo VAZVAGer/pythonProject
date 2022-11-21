@@ -15,7 +15,7 @@ class TextInput:
 
     @classmethod
     def check_name(cls, name):
-        if 3 > cls.name > 50 and cls.name in  cls.CHARS_CORRECT:
+        if 3 >= cls.name >= 50 and cls.name in cls.CHARS_CORRECT:
             return True
         else:
             raise ValueError('некорректное поле name')
@@ -34,7 +34,7 @@ class PasswordInput:
 
     @classmethod
     def check_name(cls, name):
-        if 3 > cls.name > 50 and cls.name in cls.CHARS_CORRECT:
+        if 3 >= cls.name >= 50 and cls.name in cls.CHARS_CORRECT:
             return True
         else:
             raise ValueError('некорректное поле name')
