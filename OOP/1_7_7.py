@@ -18,7 +18,7 @@ class TextInput:
         if 3 >= cls.name >= 50 and cls.name in cls.CHARS_CORRECT:
             return True
         else:
-            raise ValueError('некорректное поле name')
+            raise ValueError('некорректное поле name')## не работает
 
 
 class PasswordInput:
