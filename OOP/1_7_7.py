@@ -9,10 +9,11 @@ class TextInput:
     @classmethod
     def check_name(cls, name):
         if 3 <= len(name) <= 50:
-            if name in cls.CHARS_CORRECT:
-                return True
+            for i in name:
+                if i in cls.CHARS_CORRECT:
+                    return True
         else:
-            print("ЛОЛ")
+            raise ValueError("некорректное поле name")
 
     def __init__(self, name, size=10):
         if self.check_name(name):
@@ -30,10 +31,11 @@ class PasswordInput:
     @classmethod
     def check_name(cls, name):
         if 3 <= len(name) <= 50:
-            if name in cls.CHARS_CORRECT:
-                return True
+            for i in name:
+                if i in cls.CHARS_CORRECT:
+                    return True
         else:
-            print("ЛОЛ")
+            raise ValueError("некорректное поле name")
 
     def __init__(self, name, size=10):
         if self.check_name(name):
