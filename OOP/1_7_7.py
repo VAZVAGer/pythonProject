@@ -6,38 +6,42 @@ class TextInput:
     CHARS = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя" + ascii_lowercase
     CHARS_CORRECT = CHARS + CHARS.upper() + digits
 
+    @classmethod
+    def check_name(cls, name):
+        if 3 <= len(name) <= 50:
+            if name in cls.CHARS_CORRECT:
+                return True
+        else:
+            print("ЛОЛ")
+
     def __init__(self, name, size=10):
-        self.name = name
-        self.size = size
+        if self.check_name(name):
+            self.name = name
+            self.size = size
 
     def get_html(self):
         return f"<p class='login'>{self.name}:<input type='text'size={self.size}/>"
-
-    @classmethod
-    def check_name(cls, name):
-        if 3 >= cls.name >= 50 and cls.name in cls.CHARS_CORRECT:
-            return True
-        else:
-            raise ValueError('некорректное поле name')## не работает
 
 
 class PasswordInput:
     CHARS = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя" + ascii_lowercase
     CHARS_CORRECT = CHARS + CHARS.upper() + digits
 
+    @classmethod
+    def check_name(cls, name):
+        if 3 <= len(name) <= 50:
+            if name in cls.CHARS_CORRECT:
+                return True
+        else:
+            print("ЛОЛ")
+
     def __init__(self, name, size=10):
-        self.name = name
-        self.size = size
+        if self.check_name(name):
+            self.name = name
+            self.size = size
 
     def get_html(self):
         return f"<p class='password'>{self.name}:<input type='text'size={self.size}/>"
-
-    @classmethod
-    def check_name(cls, name):
-        if 3 >= cls.name >= 50 and cls.name in cls.CHARS_CORRECT:
-            return True
-        else:
-            raise ValueError('некорректное поле name')
 
 
 class FormLogin:
