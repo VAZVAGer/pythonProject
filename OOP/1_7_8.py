@@ -1,15 +1,18 @@
 from string import ascii_lowercase, digits
 import re
 
+
 class CardCheck:
     CHARS_FOR_NAME = ascii_lowercase.upper() + digits
 
-    def check_card_number(number):
-        if type(number) in int:
-            if number == r'\d{4}-\d{4}-\d{4}-\d{4}' r'[A-Z]+\s[A-Z]+':
-                return True
-        else:
-            return False
+    @classmethod
+    def check_card_number(cls, number):
+        pattern = r"\d\d\d\d-\d\d\d\d-\d\d\d\d-\d\d\d\d"
+        match = re.fullmatch(pattern, number)
+        return True if match else False
 
-    def check_name(name):
-#f'[{cls.CHARS_FOR_NAME}]+\s[{cls.CHARS_FOR_NAME}]+'
+    @classmethod
+    def check_name(cls, name):
+        pattern = r'^[A-Z]{1,100}\s[A-Z]{1,100}$'
+        match = re.fullmatch(pattern, name)
+        return True if match else False
