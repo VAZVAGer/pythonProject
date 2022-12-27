@@ -11,7 +11,7 @@ class AppStore:
     def block_application(self, app):
         for i in self.Application_list:
             if i == app:
-                i.blocked = True
+                i.fl_like = True
 
     def total_apps(self):
         return len(self.Application_list)
