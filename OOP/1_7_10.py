@@ -1,5 +1,6 @@
 class AppStore:
-    Application_list = []
+    def __init__(self):
+        self.Application_list = []
 
     def add_application(self, app):
         self.Application_list.append(app)
@@ -8,7 +9,15 @@ class AppStore:
         self.Application_list.remove(app)
 
     def block_application(self, app):
-        pass
+        for i in self.Application_list:
+            if i == app:
+                i.blocked = True
 
     def total_apps(self):
         return len(self.Application_list)
+
+
+class Application:
+    def __init__(self, name, blocked=False):
+        self.name = name
+        self.blocked = blocked
