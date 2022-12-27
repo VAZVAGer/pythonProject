@@ -14,10 +14,11 @@ class Viber:
                 elif i.blocked == True:
                     i.blocked == False
 
-    def show_last_message(число):
-        pass
+    def show_last_message(self, number):
+        for mes in self.list_msg[-number:]:
+            print(mes)
     def total_messages(self):
-        pass
+        return len(self.list_msg)
 
 class Message:
     def __init__(self, text, fl_like=False):
