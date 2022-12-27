@@ -1,16 +1,22 @@
 class Viber:
     def __init__(self):
         self.list_msg = []
-    def add_message(msg):
-        pass
-    def remove_message(msg):
-        pass
-    def set_like(msg):
-        pass
+    def add_message(self, msg):
+        self.list_msg.append(msg)
+
+    def remove_message(self, msg):
+        self.list_msg.remove(msg)
+    def set_like(self, msg):
+        for i in self.list_msg:
+            if i == msg:
+                if i.blocked == False:
+                    i.blocked = True
+                elif i.blocked == True:
+                    i.blocked == False
 
     def show_last_message(число):
         pass
-    def total_messages():
+    def total_messages(self):
         pass
 
 class Message:
