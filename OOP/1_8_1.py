@@ -21,10 +21,17 @@ class Server:
     def __init__(self):
         self.buffer = []
         self.ip = self.counter_server + 1
-        self.counter_server = self.ip
+        self.counter_server = self.counter_server + 1
 
 
 class Data:
     def __init__(self, data, ip):
         self.data = data
         self.ip = ip
+
+sv_from = Server()
+sv_from2 = Server()
+sv_from3 = Server()
+print(sv_from.ip)
+print(sv_from2.ip)
+print(sv_from3.ip)
