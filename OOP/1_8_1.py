@@ -20,8 +20,8 @@ class Server:
 
     def __init__(self):
         self.buffer = []
-        self.ip = self.counter_server + 1
-        self.counter_server = self.counter_server + 1
+        self.ip = Server.counter_server + 1
+        Server.counter_server = Server.counter_server + 1
 
 
 class Data:
