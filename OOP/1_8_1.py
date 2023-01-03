@@ -1,7 +1,7 @@
 class Router:
     def __init__(self):
-        buffer = []
-        list_of_connected_servers = []
+        self.buffer = []
+        self.list_of_connected_servers = []
 
     def link(self, server):  # Для присоеденения сервера к роутеру.
         self.list_of_connected_servers.append(server)
@@ -16,18 +16,18 @@ class Router:
             address = data.self.ip
 
 
-class Server:
+class Server: ## Вроде готов!
     counter_server = 0
 
     def __init__(self):
         self.buffer = []
         self.ip = Server.counter_server + 1
         Server.counter_server = Server.counter_server + 1
-    def send_data(self, data):
-        Data(data, )
+    def send_data(self, data, ip):
+        Router().buffer.append(Data(data, ip))
 
     def get_data(self):
-        pass
+        return self.buffer
 
     def get_ip(self):
         return self.ip
