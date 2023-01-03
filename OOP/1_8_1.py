@@ -9,10 +9,12 @@ class Router:
     def unlink(self, server):  # Для отсоединения сервера server (объекта класса Server) от роутера
         self.list_of_connected_servers.remove(server)
 
-    def send_data(self):  # Для отправки всех пакетов (объектов класса Data) из буфера роутера соответствующим серверам (после отправки буфер должен очищаться).
-       for mes in self.buffer:
-           address_of_the_recipient = mes.Data.ip
-           information = mes.Data.data
+    def send_data(
+            self):  # Для отправки всех пакетов (объектов класса Data) из буфера роутера соответствующим серверам (после отправки буфер должен очищаться).
+        for mes in self.buffer:
+            for recipient in self.list_of_connected_servers:
+                if recipient.Server.ip == mes.Data.ip:
+                    recipient.Server.buffer.append(mes.Data.data)
 
 
 class Server:  ## Вроде готов!
