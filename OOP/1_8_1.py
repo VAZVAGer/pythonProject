@@ -1,6 +1,6 @@
 class Router:
+    buffer = []
     def __init__(self):
-        self.buffer = []
         self.list_of_connected_servers = []
 
     def link(self, server):  # Для присоеденения сервера к роутеру.
@@ -11,10 +11,10 @@ class Router:
 
     def send_data(
             self):  # Для отправки всех пакетов (объектов класса Data) из буфера роутера соответствующим серверам (после отправки буфер должен очищаться).
-        for mes in self.buffer:
+        for mes in Router.buffer:
             for recipient in self.list_of_connected_servers:
-                if recipient.Server.ip == mes.Data.ip:
-                    recipient.Server.buffer.append(mes.Data.data)
+                if recipient.ip == mes.ip:
+                    recipient.buffer.append(mes.data)
 
 
 class Server:  ## Вроде готов!
@@ -30,6 +30,7 @@ class Server:  ## Вроде готов!
         Router().buffer.append(Data(data, self.ip))
 
     def get_data(self):
+        print(self.buffer)
         return self.buffer
 
     def get_ip(self):
