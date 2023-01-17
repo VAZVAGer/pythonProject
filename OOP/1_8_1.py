@@ -1,20 +1,21 @@
 class Router:
-    buffer = []
+
     def __init__(self):
-        self.list_of_connected_servers = []
+        self.buffer = []
+        self.list_of_connected_servers = {}
 
     def link(self, server):  # Для присоеденения сервера к роутеру.
-        self.list_of_connected_servers.append(server)
+        self.list_of_connected_servers[server.ip] = server
 
     def unlink(self, server):  # Для отсоединения сервера server (объекта класса Server) от роутера
-        self.list_of_connected_servers.remove(server)
+        s = self.list_of_connected_servers.pop(server.ip, False)
 
     def send_data(
             self):  # Для отправки всех пакетов (объектов класса Data) из буфера роутера соответствующим серверам (после отправки буфер должен очищаться).
-        for mes in Router.buffer:
-            for recipient in self.list_of_connected_servers:
-                if recipient.ip == mes.ip:
-                    recipient.buffer.append(mes.data)
+        for mes in self.buffer:
+            if mes.ip in self.list_of_connected_servers:
+                self.list_of_connected_servers[mes.ip].buffer.append(mes)
+        self.buffer.clear()
 
 
 class Server:  ## Вроде готов!
@@ -25,13 +26,13 @@ class Server:  ## Вроде готов!
         self.ip = Server.counter_server + 1
         Server.counter_server = Server.counter_server + 1
 
-
     def send_data(self, data):
-        Router().buffer.append(Data(data, self.ip))
+        router.buffer.append(data)
 
     def get_data(self):
-        print(self.buffer)
-        return self.buffer
+        buf_c = self.buffer[:]
+        self.buffer.clear()
+        return buf_c
 
     def get_ip(self):
         return self.ip
@@ -43,8 +44,10 @@ class Data:  ## Класс готов.
         self.ip = ip
 
 
-assert hasattr(Router, 'link') and hasattr(Router, 'unlink') and hasattr(Router, 'send_data'), "в классе Router присутсвутю не все методы, указанные в задании"
-assert hasattr(Server, 'send_data') and hasattr(Server, 'get_data') and hasattr(Server, 'get_ip'), "в классе Server присутсвутю не все методы, указанные в задании"
+assert hasattr(Router, 'link') and hasattr(Router, 'unlink') and hasattr(Router,
+                                                                         'send_data'), "в классе Router присутсвутю не все методы, указанные в задании"
+assert hasattr(Server, 'send_data') and hasattr(Server, 'get_data') and hasattr(Server,
+                                                                                'get_ip'), "в классе Server присутсвутю не все методы, указанные в задании"
 
 router = Router()
 sv_from = Server()
@@ -64,12 +67,14 @@ msg_lst_to = sv_to.get_data()
 
 assert len(router.buffer) == 0, "после отправки сообщений буфер в роутере должен очищаться"
 assert len(sv_from.buffer) == 0, "после получения сообщений буфер сервера должен очищаться"
-
+print(len(msg_lst_to))
 assert len(msg_lst_to) == 2, "метод get_data вернул неверное число пакетов"
 
-assert msg_lst_from[0].data == "Hi" and msg_lst_to[0].data == "Hello", "данные не прошли по сети, классы не функционируют должным образом"
+assert msg_lst_from[0].data == "Hi" and msg_lst_to[
+    0].data == "Hello", "данные не прошли по сети, классы не функционируют должным образом"
 
-assert hasattr(router, 'buffer') and hasattr(sv_to, 'buffer'), "в объектах классов Router и/или Server отсутствует локальный атрибут buffer"
+assert hasattr(router, 'buffer') and hasattr(sv_to,
+                                             'buffer'), "в объектах классов Router и/или Server отсутствует локальный атрибут buffer"
 
 router.unlink(sv_to)
 sv_from.send_data(Data("Hello", sv_to.get_ip()))
