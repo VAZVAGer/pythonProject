@@ -12,7 +12,7 @@ class Rectangle:
     def __init__(self, x1, y1, x2=None, y2=None):
         if x2 == None and y2 == None:
             self.__sp = x1
-            self.__ep = y2
+            self.__ep = y1
         else:
             self.__sp = Point(x1, y1)
             self.__ep = Point(x2, y2)
