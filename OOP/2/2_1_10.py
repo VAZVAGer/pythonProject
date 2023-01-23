@@ -1,16 +1,27 @@
-from string import ascii_lowercase, digits
+
 import re
+import random
 class EmailValidator:
-    CHARS_FOR_NAME = ascii_lowercase.upper() + ascii_lowercase.lower() + digits + "_" + "."
     def __new__(cls, *args, **kwargs):
         return None
 
     @classmethod
     def get_random_email(cls):
-        pass
+        random_value = random.randrange(1, 100)
+        random_mail = random.sample('abcdefghijklmnopqrstuvwxyz0123456789_.', random_value)
+        random_mail = ''.join(random_mail)
+        random_mail = random_mail + "@gmail.com"
+        return random_mail
 
     def __is_email_str(cls, email):
         if type(email) == str:
             return True
         else:
             return False
+    def check_email(cls, email):
+        if EmailValidator.__is_email_str():
+            pass
+        else:
+            return False
+
+
