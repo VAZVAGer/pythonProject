@@ -1,4 +1,3 @@
-import re
 import random
 
 
@@ -35,10 +34,10 @@ class EmailValidator:
                 return False
 
     @staticmethod
-    def character_length(email):
+    def __character_length(email):
         counter = 0
         for symbol in email:
-            if symbol == "@":
+            if symbol != "@":
                 counter += 1
             else:
                 break
@@ -48,10 +47,10 @@ class EmailValidator:
             return False
 
     @staticmethod
-    def length_after_character(email):
+    def __length_after_character(email):
         counter = 0
         for symbol in email[::-1]:
-            if symbol == "@":
+            if symbol != "@":
                 counter += 1
             else:
                 break
@@ -60,7 +59,31 @@ class EmailValidator:
         else:
             return False
 
+    @staticmethod
+    def __point_search(email):
+        for symbol in email[::-1]:
+            if symbol != "@":
+                if symbol == ".":
+                    return True
+            else:
+                break
+
+    @staticmethod
+    def __must_not_be(email):
+        if ".." in email:
+            return False
+        else:
+            return True
+
     @classmethod
     def check_email(cls, email):
-        if EmailValidator.__is_email_str():
-            pass
+        if EmailValidator.__is_email_str(email) and EmailValidator.__valid_symbols(
+                email) and EmailValidator.__character_length(email) and EmailValidator.__length_after_character(
+            email) and EmailValidator.__point_search(email) and EmailValidator.__must_not_be(email):
+            return True
+        else:
+            False
+
+
+res = EmailValidator.check_email("sc_lib@list.ru") # True
+res = EmailValidator.check_email("sc_lib@list_ru") # False
