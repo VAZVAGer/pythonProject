@@ -34,11 +34,33 @@ class EmailValidator:
             else:
                 return False
 
+    @staticmethod
+    def character_length(email):
+        counter = 0
+        for symbol in email:
+            if symbol == "@":
+                counter += 1
+            else:
+                break
+        if len(counter) <= 100:
+            return True
+        else:
+            return False
 
+    @staticmethod
+    def length_after_character(email):
+        counter = 0
+        for symbol in email[::-1]:
+            if symbol == "@":
+                counter += 1
+            else:
+                break
+        if len(counter) <= 50:
+            return True
+        else:
+            return False
 
     @classmethod
     def check_email(cls, email):
         if EmailValidator.__is_email_str():
-
-        else:
-            return False
+            pass
