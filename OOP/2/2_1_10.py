@@ -28,8 +28,8 @@ class EmailValidator:
         for symbol in email:
             if EmailValidator.symbols.find(symbol) != -1:
                 list_valid.append(symbol)
-            if len(list_valid) == email:
-                return True
+                if len(list_valid) == len(email):
+                    return True
             else:
                 return False
 
@@ -41,7 +41,7 @@ class EmailValidator:
                 counter += 1
             else:
                 break
-        if len(counter) <= 100:
+        if counter <= 99:
             return True
         else:
             return False
@@ -54,7 +54,7 @@ class EmailValidator:
                 counter += 1
             else:
                 break
-        if len(counter) <= 50:
+        if counter <= 49:
             return True
         else:
             return False
@@ -82,8 +82,20 @@ class EmailValidator:
             email) and EmailValidator.__point_search(email) and EmailValidator.__must_not_be(email):
             return True
         else:
-            False
+            return False
 
 
-res = EmailValidator.check_email("sc_lib@list.ru") # True
-res = EmailValidator.check_email("sc_lib@list_ru") # False
+assert EmailValidator.check_email("sc_lib@list.ru") == True and EmailValidator.check_email(
+    "sc_lib@list_ru") == False and EmailValidator.check_email("sc@lib@list_ru") == False and EmailValidator.check_email(
+    "sc.lib@list_ru") == False and EmailValidator.check_email("sclib@list.ru") == True and EmailValidator.check_email(
+    "sc.lib@listru") == False and EmailValidator.check_email(
+    "sc..lib@list.ru") == False, "метод check_email отработал некорректно"
+
+m = EmailValidator.get_random_email()
+print(m)
+assert EmailValidator.check_email(
+    m) == True, "метод check_email забраковал сгенерированный email методом get_random_email"
+
+assert EmailValidator() is None, "при создании объекта класса EmailValidator возвратилось значение отличное от None"
+
+assert EmailValidator._EmailValidator__is_email_str('abc'), "метод __is_email_str() вернул False для строки"
