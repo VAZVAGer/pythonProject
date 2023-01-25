@@ -1,8 +1,19 @@
 class ObjList:
-    def __init__(self, next, prev, data, head=None, tail=None):
-        self.__next = next
-        self.__prev = prev
+    def __init__(self, data):
+        self.__next = None
+        self.__prev = None
         self.__data = data
-        self.head = head
-        self.tail = tail
+
+    def set_next(self, obj):
+        self.__next = obj
+    def set_prev(self, obj):
+        self.__prev = obj
+    def get_next(self):
+        return self.__next
+    def get_prev(self):
+        return self.__prev
+    def set_data(self, data):
+        self.__data = data
+    def get_data(self):
+        return self.__data
 
