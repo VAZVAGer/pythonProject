@@ -9,7 +9,7 @@ class EmailValidator:
 
     @classmethod
     def get_random_email(cls):
-        random_value = random.randrange(1, 100)
+        random_value = random.randrange(10, 15)
         random_mail = random.sample(EmailValidator.symbols, random_value)
         random_mail = ''.join(random_mail)
         random_mail = random_mail + "@gmail.com"
