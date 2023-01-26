@@ -27,14 +27,13 @@ class LinkedList:
     def __init__(self, ):
         self.head = None
 
-    def insert_at_end(self, data):
+    def add_obj(self, obj):
         if self.head is None:
-            new_Obj = ObjList(data)
-            self.head = new_Obj
+            self.head = obj
             return
         n = self.head
-        while n.get_prev() is not None:
+        while n.get_prev is not None:
             n = n.get_prev()
-        new_Obj = ObjList(data)
-        n.set_prev = new_Obj
-        new_Obj.set_prev = n
+        n.set_prev = obj
+        obj.set_prev = n
+
