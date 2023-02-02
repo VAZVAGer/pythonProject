@@ -47,3 +47,13 @@ class LinkedList:
         while n.get_next() is not None:
             n = n.get_next()
         n.get_prev().set_next(None)
+
+    def get_data(self): ## получение списка из строк локального свойства __data всех объектов связного списка.
+        list_data = []
+        if self.head is None:
+            return []
+        else:
+            n = self.head
+            while n is not None:
+                list_data.append(n.get_data())
+                n = n.get_next()
