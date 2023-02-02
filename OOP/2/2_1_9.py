@@ -27,7 +27,7 @@ class LinkedList:
     def __init__(self, ):
         self.head = None
 
-    def add_obj(self, obj): ## добавление нового объекта obj класса ObjList в конец связного списка;
+    def add_obj(self, obj):  ## добавление нового объекта obj класса ObjList в конец связного списка
         if self.head is None:
             new_obj = obj
             self.head = new_obj
@@ -39,5 +39,11 @@ class LinkedList:
         n.set_next(new_obj)
         new_obj.set_prev(n)
 
-
-
+    def remove_obj(self):  ## удаление последнего объекта из связного списка
+        if self.head.get_pref() is None:
+            self.head = None
+            return
+        n = self.head
+        while n.get_next() is not None:
+            n = n.get_next()
+        n.get_prev().set_next(None)
