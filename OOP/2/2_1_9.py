@@ -27,13 +27,17 @@ class LinkedList:
     def __init__(self, ):
         self.head = None
 
-    def add_obj(self, obj):
+    def add_obj(self, obj): ## добавление нового объекта obj класса ObjList в конец связного списка;
         if self.head is None:
-            self.head = obj
+            new_obj = obj
+            self.head = new_obj
             return
         n = self.head
-        while n.get_prev is not None:
-            n = n.get_prev()
-        n.set_prev = obj
-        obj.set_prev = n
+        while n.get_next() is not None:
+            n = n.get_next()
+        new_obj = obj
+        n.set_next(new_obj)
+        new_obj.set_prev(n)
+
+
 
