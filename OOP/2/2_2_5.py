@@ -14,6 +14,8 @@ class WindowDlg:
     @width.setter
     def width(self, vel):
         if type(vel) == int and 0 <= vel <= 10000:
+            if self.__width:
+                self.show()
             self.__width = vel
 
     @property
@@ -23,4 +25,6 @@ class WindowDlg:
     @height.setter
     def height(self, vel):
         if type(vel) == int and 0 <= vel <= 10000:
+            if self.__height:
+                self.show()
             self.__height = vel
