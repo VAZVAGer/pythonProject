@@ -3,7 +3,6 @@ class RadiusVector2D:
     MAX_COORD = 1024
 
     def __init__(self, x=0, y=0):
-
         if self.validate(x):
             self.__x = x
         if self.validate(y):
@@ -11,7 +10,6 @@ class RadiusVector2D:
         else:
             self.__x = 0
             self.__y = 0
-
 
     @staticmethod
     def validate(vel):
