@@ -23,23 +23,22 @@ class TreeObj:
 
 
 class DecisionTree:
-    def __init__(self):
-        self.head = None
 
     @classmethod
     def predict(cls, root, x):  ## x = [1, 1, 0]
-        for ind, vel in enumerate(x):
-
+        obj = root
+        while obj.left != None or obj.right != None:
+            if x[obj.self.indx] == 1:
+                obj = obj.left
+            else:
+                obj = obj.right
+        return obj
 
     @classmethod
     def add_obj(cls, obj, node=None, left=True):
-        if cls.head is None:
-            new_obj = obj
-            cls.head = new_obj
-            return new_obj
-        if left:
-            node.left = obj
-            return obj
-        if left == False:
-            node.ridht = obj
+        if node:
+            if left:
+                node.left = obj
+            else:
+                node.ridht = obj
             return obj
