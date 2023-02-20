@@ -18,7 +18,7 @@ class TreeObj:
         return self.__right
 
     @right.setter
-    def left(self, data):
+    def right(self, data):
         self.__right = data
 
 
@@ -28,11 +28,11 @@ class DecisionTree:
     def predict(cls, root, x):  ## x = [1, 1, 0]
         obj = root
         while obj.left != None or obj.right != None:
-            if x[obj.self.indx] == 1:
+            if x[obj.indx] == 1:
                 obj = obj.left
             else:
                 obj = obj.right
-        return obj
+        return obj.value
 
     @classmethod
     def add_obj(cls, obj, node=None, left=True):
@@ -40,5 +40,22 @@ class DecisionTree:
             if left:
                 node.left = obj
             else:
-                node.ridht = obj
-            return obj
+                node.right = obj
+        return obj
+
+
+assert hasattr(DecisionTree, 'add_obj') and hasattr(DecisionTree, 'predict'), "в классе DecisionTree должны быть методы add_obj и predict"
+
+assert type(TreeObj.left) == property and type(TreeObj.right) == property, "в классе TreeObj должны быть объекты-свойства left и right"
+
+root = DecisionTree.add_obj(TreeObj(0))
+v_11 = DecisionTree.add_obj(TreeObj(1), root)
+v_12 = DecisionTree.add_obj(TreeObj(2), root, False)
+DecisionTree.add_obj(TreeObj(-1, "программист"), v_11)
+DecisionTree.add_obj(TreeObj(-1, "кодер"), v_11, False)
+DecisionTree.add_obj(TreeObj(-1, "посмотрим"), v_12)
+DecisionTree.add_obj(TreeObj(-1, "нет"), v_12, False)
+
+assert DecisionTree.predict(root, [1, 1, 0]) == 'программист', "неверный вывод решающего дерева"
+assert DecisionTree.predict(root, [0, 1, 0]) == 'нет', "неверный вывод решающего дерева"
+assert DecisionTree.predict(root, [0, 1, 1]) == 'посмотрим', "неверный вывод решающего дерева"
