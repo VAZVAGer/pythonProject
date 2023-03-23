@@ -22,3 +22,12 @@ class PathLines:
     def __init__(self, *args):
         self.coords = list((LineTo(0, 0),) + args)
 
+    def get_path(self):
+        return self.coords
+
+    def get_length(self):
+        passL = sqrt((x1-x0)^2 + (y1-y0)^2)
+
+    def dd_line(self, line):
+        self.coords.append(line)
+
