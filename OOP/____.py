@@ -10,14 +10,34 @@ class FloatValue:
 
     def __get__(self, instance, owner):
         return getattr(instance, self.name)
+
+
 class Cell:
     value = FloatValue()
 
     def __init__(self, value=0.0):
         self.value = value
+
+
 N = 5
 M = 3
-cells = [[Cell() for _ in range(M)] for _ in range(N)]
-cells1 = [[Cell()] * M] * N
+cells = [[0 for _ in range(M)] for _ in range(N)]
+cells1 = [[0] * M] * N
+
+
+print(cells)
+print(cells1)
+
+n = 1.0
+for i in range(5):
+    for j in range(3):
+        cells[i][j] = n
+        n += 1.0
+n = 1.0
+for i in range(5):
+    for j in range(3):
+        cells1[i][j] = n
+        n += 1.0
+
 print(cells)
 print(cells1)

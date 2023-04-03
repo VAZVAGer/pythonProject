@@ -22,8 +22,9 @@ class Cell:
 class TableSheet:
     def __init__(self, N, M):
         self.cells = [[Cell()for _ in range(M)] for _ in range(N)]
-        #self.cells = [[Cell()] * M] * N
-        print(self.cells)
+
+
+
 
 
 table = TableSheet(5, 3)
