@@ -9,9 +9,9 @@ class Bag:
         return self.__things
 
     def add_thing(self, thing):
-        if self.thing.weight + self.weight < self.max_weight:
+        if thing.weight + self.weight < self.max_weight:
             self.__things.append(thing)
-            self.weight = self.weight + self.thing.weight
+            self.weight = self.weight + thing.weight
 
     def remove_thing(self, indx):
         self.__things.pop(indx)
