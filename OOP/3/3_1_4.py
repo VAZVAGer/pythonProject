@@ -25,7 +25,7 @@ class Product:
             if type(value) != str:
                 raise TypeError("Неверный тип присваиваемых данных.")
         if key == 'weight' or key == 'price' or key == 'uid':
-            if type(value) != int or value < 0:
+
                 raise TypeError("Неверный тип присваиваемых данных.")
 
         object.__setattr__(self, key, value)
