@@ -1,3 +1,4 @@
-import random
-uid = random.randint(1, 9999999)
-print(uid)
+s = "My best friend is Python!"
+s1 = (s.replace(' ', "\""))
+print(s1)
+print(s1.replace('"', "\'", 1))
