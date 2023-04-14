@@ -5,11 +5,13 @@ class Circle:
         self.radius = radius
 
     def __setattr__(self, key, value):
-        if key in ('__x', "__y"):
-            if key in (int, float):
-                object.__setattr__(self, key, value)
+        if key in ('__x', "__y") and value in (int, float):
+            object.__setattr__(self, key, value)
+
         if key == "radius" and value > 0:
             object.__setattr__(self, key, value)
+
+
     def __delattr__(self, item):
         return False
 
