@@ -1,24 +1,21 @@
 class Circle:
     def __init__(self, x, y, radius):
-        if type(x) not in (int, float):
-            raise TypeError("Неверный тип присваиваемых данных.")
-
         self.x = x
-        if type(y) not in (int, float):
-            raise TypeError("Неверный тип присваиваемых данных.")
         self.y = y
-        if type(radius) not in (int, float):
-            raise TypeError("Неверный тип присваиваемых данных.")
         self.radius = radius
 
     def __setattr__(self, key, value):
-        if key in ('x', "y") and value in (int, float):
+        if key in ('x', "y") or value in (int, float):
             object.__setattr__(self, key, value)
+        elif key in ('x', "y") or value in (int, float):
+            raise TypeError("Неверный тип присваиваемых данных.")
 
-        if key == "radius" and value > 0:
+        if key == "radius" or value in (int, float) or value > 0:
             object.__setattr__(self, key, value)
+        elif key == "radius" or value in (int, float):
+            raise TypeError("Неверный тип присваиваемых данных.")
 
-    def __delattr__(self, item):
+    def __getattr__(self, item):
         return False
 
     @property
@@ -26,24 +23,24 @@ class Circle:
         return self.__x
 
     @x.setter
-    def x(self, x):
-        self.__x = x
+    def x(self, value):
+        self.__x = value
 
     @property
     def y(self):
         return self.__y
 
     @y.setter
-    def y(self, y):
-        self.__y = y
+    def y(self, value):
+        self.__y = value
 
     @property
     def radius(self):
-        return self.__x
+        return self.__radius
 
     @radius.setter
-    def radius(self, radius):
-        self.__radius = radius
+    def radius(self, value):
+        self.__radius = value
 
 
 assert type(Circle.x) == property and type(Circle.y) == property and type(
