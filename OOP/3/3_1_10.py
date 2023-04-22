@@ -4,18 +4,22 @@ import time
 class Mechanical:
     def __init__(self, date=0):
         self.date = date
+
     def __setattr__(self, key, value):
         if self.__dict__.get("date"):
             return None
         return object.__setattr__(self, key, value)
 
+
 class Aragon:
     def __init__(self, date=0):
         self.date = date
+
     def __setattr__(self, key, value):
         if self.__dict__.get("date"):
             return None
         return object.__setattr__(self, key, value)
+
 
 class Calcium:
     def __init__(self, date=0):
@@ -34,15 +38,14 @@ class GeyserClassic:
         self.slot_list = [None, None, None]
 
     def add_filter(self, slot_num, filter):
-        if type(filter) == "Mechanical" or slot_num == 1 or self.slot_list[0] == None:
+        if type(filter) == Mechanical and slot_num == 1 and self.slot_list[0] == None:
             self.slot_list[0] = filter
 
-        elif type(filter) == "Aragon" or slot_num == 2 or self.slot_list[1] == None:
+        elif type(filter) == Aragon and slot_num == 2 and self.slot_list[1] == None:
             self.slot_list[1] = filter
 
-        elif type(filter) == "Calcium" or slot_num == 3 or self.slot_list[2] == None:
+        elif type(filter) == Calcium and slot_num == 3 and self.slot_list[2] == None:
             self.slot_list[2] = filter
-
 
     def remove_filter(self, slot_num):
         if self.slot_list[slot_num - 1] != None:
@@ -61,7 +64,6 @@ class GeyserClassic:
                 return False
         if None in self.slot_list:
             return False
-
 
 
 my_water = GeyserClassic()
