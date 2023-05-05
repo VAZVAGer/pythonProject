@@ -1,21 +1,24 @@
 class WordString:
-    def __init__(self):
-        self.string = None
+    def __init__(self, string=''):
+        self.string = string
 
     def __len__(self):
-        return len(self.string.split(" "))
+        return len(self.string.split())
 
-    def __call__(self, *args, **kwargs):
-        return self.string[args[0]]
+    def __call__(self, indx):
+        return self.words(indx)
+
+    def words(self, indx):
+        if self.__len__() - 1 >= indx:
+            return self.__string.split()[indx]
 
     @property
     def string(self):
-        return self.string
+        return self.__string
 
     @string.setter
     def string(self, string):
-        self.string = string
-
+        self.__string = string
 
 
 words = WordString()
