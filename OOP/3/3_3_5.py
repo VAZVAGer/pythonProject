@@ -51,4 +51,5 @@ class LinkedList:
         if ind == 0:
             self.head = self.head.next
             self.head.prev = None
-
+        else:
+            pass
