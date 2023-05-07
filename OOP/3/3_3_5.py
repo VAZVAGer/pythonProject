@@ -47,9 +47,19 @@ class LinkedList:
             temporary_link.prev = self.tail
             self.tail = obj
 
-    def remove_obj(self, ind):  # удаление объекта класса ObjList из связного списка по его порядковому номеру (индексу); индекс отсчитывается с нуля.
+    def remove_obj(self,
+                   ind):  # удаление объекта класса ObjList из связного списка по его порядковому номеру (индексу); индекс отсчитывается с нуля.
         if ind == 0:
             self.head = self.head.next
             self.head.prev = None
         else:
-            pass
+            ind_counter = self.head
+            counter = 0
+            while counter != ind:
+                ind_counter = ind_counter.next
+                counter += 1
+            else:
+                prev_object = ind_counter.prev
+                next_object = ind_counter.next
+                prev_object.next = ind_counter.next
+                next_object.prev = ind_counter.prev
