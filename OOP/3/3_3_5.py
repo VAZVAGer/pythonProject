@@ -34,6 +34,29 @@ class LinkedList:
         self.head = None  # ссылка на первый объект связного списка (если список пуст, то head = None)
         self.tail = None  # ссылка на последний объект связного списка (если список пуст, то tail = None)
 
+    def __len__(self):
+        ind_counter = self.head
+        counter = 0
+        while ind_counter != None:
+            ind_counter = ind_counter.next
+            counter += 1
+        else:
+            return counter
+
+    def __call__(self, ind, *args, **kwargs):
+        if ind == 0:
+            return self.head.data
+        else:
+            ind_counter = self.head
+            counter = 0
+            while counter != ind:
+                ind_counter = ind_counter.next
+                counter += 1
+            else:
+                return ind_counter.data
+
+
+
     def add_obj(self, obj):
         if self.head == None and self.tail == None:
             self.head = obj
