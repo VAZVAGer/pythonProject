@@ -1,8 +1,8 @@
 class ObjList:
-    def __init__(self, prev=None, data='', next=None):
-        self.prev = prev
+    def __init__(self, data=''):
+        self.prev = None
         self.data = data
-        self.next = next
+        self.next = None
 
     @property
     def prev(self):
@@ -35,27 +35,31 @@ class LinkedList:
         self.tail = None  # ссылка на последний объект связного списка (если список пуст, то tail = None)
 
     def __len__(self):
-        ind_counter = self.head
         counter = 0
-        while ind_counter != None:
-            ind_counter = ind_counter.next
-            counter += 1
+        if self.head == None and self.tail == None:
+            return 0
         else:
-            return counter
+            ind_counter = self.head
+            while ind_counter != None:
+                ind_counter = ind_counter.next
+                counter += 1
+            else:
+                return counter
 
     def __call__(self, ind, *args, **kwargs):
         if ind == 0:
             return self.head.data
-        else:
+        elif ind > 0:
             ind_counter = self.head
             counter = 0
             while counter != ind:
                 ind_counter = ind_counter.next
                 counter += 1
             else:
-                return ind_counter.data
-
-
+                if ind_counter is ind_counter:
+                    return self.tail.data
+                else:
+                    return ind_counter.data
 
     def add_obj(self, obj):
         if self.head == None and self.tail == None:
@@ -70,11 +74,11 @@ class LinkedList:
             temporary_link.prev = self.tail
             self.tail = obj
 
-    def remove_obj(self,
-                   ind):  # удаление объекта класса ObjList из связного списка по его порядковому номеру (индексу); индекс отсчитывается с нуля.
+    def remove_obj(self, ind):
         if ind == 0:
             self.head = self.head.next
-            self.head.prev = None
+            if self.head is not None:
+                self.head.prev = None
         else:
             ind_counter = self.head
             counter = 0
@@ -84,5 +88,50 @@ class LinkedList:
             else:
                 prev_object = ind_counter.prev
                 next_object = ind_counter.next
-                prev_object.next = ind_counter.next
-                next_object.prev = ind_counter.prev
+                prev_object.next = next_object
+                if next_object is not None:
+                    next_object.prev = prev_object
+
+
+
+
+ln = LinkedList()
+ln.add_obj(ObjList("Сергей"))
+ln.add_obj(ObjList("Балакирев"))
+ln.add_obj(ObjList("Python ООП"))
+ln.remove_obj(2)
+assert len(ln) == 2, "функция len вернула неверное число объектов в списке, возможно, неверно работает метод remove_obj()"
+ln.add_obj(ObjList("Python"))
+assert ln(2) == "Python", "неверное значение атрибута __data, взятое по индексу"
+print(len(ln))
+assert len(ln) == 3, "функция len вернула неверное число объектов в списке"
+assert ln(1) == "Балакирев", "неверное значение атрибута __data, взятое по индексу"
+
+n = 0
+h = ln.head
+while h:
+    assert isinstance(h, ObjList)
+    h = h._ObjList__next
+    n += 1
+
+assert n == 3, "при перемещении по списку через __next не все объекты перебрались"
+
+n = 0
+h = ln.tail
+while h:
+    assert isinstance(h, ObjList)
+    h = h._ObjList__prev
+    n += 1
+
+assert n == 3, "при перемещении по списку через __prev не все объекты перебрались"
+
+assert n == 3, "при перемещении по списку через __next не все объекты перебрались"
+
+n = 0
+h = ln.tail
+while h:
+    assert isinstance(h, ObjList)
+    h = h._ObjList__prev
+    n += 1
+
+assert n == 3, "при перемещении по списку через __prev не все объекты перебрались"
