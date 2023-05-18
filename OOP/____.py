@@ -1,6 +1,5 @@
-ddd = "Курс по       Python ООП"
+ddd = [8, 66, 21]
 
-def lst_str(string):
-    print(string.split())
-
-lst_str(ddd)
+for i, zn in enumerate(ddd):
+    ddd.insert(i - 1, zn)
+print(ddd)

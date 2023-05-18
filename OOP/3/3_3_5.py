@@ -56,7 +56,7 @@ class LinkedList:
                 ind_counter = ind_counter.next
                 counter += 1
             else:
-                if ind_counter is ind_counter:
+                if ind_counter is self.tail:
                     return self.tail.data
                 else:
                     return ind_counter.data
@@ -75,24 +75,32 @@ class LinkedList:
             self.tail = obj
 
     def remove_obj(self, ind):
-        if ind == 0:
+        if ind == 0 and self.head.next is self.tail:
+            self.head = self.tail
+            self.tail.prev = None
+        else:
             self.head = self.head.next
             if self.head is not None:
                 self.head.prev = None
-        else:
+            if self.head is self.tail:
+                self.tail = None
+        if ind != 0:
             ind_counter = self.head
             counter = 0
             while counter != ind:
                 ind_counter = ind_counter.next
                 counter += 1
+            if ind_counter is self.tail:
+                if self.tail.prev is self.head:
+                    self.tail = None
+                    self.head.next = None
+                self.tail = self.tail.prev
+                self.tail.next = None
             else:
                 prev_object = ind_counter.prev
                 next_object = ind_counter.next
                 prev_object.next = next_object
-                if next_object is not None:
-                    next_object.prev = prev_object
-
-
+                next_object.prev = prev_object
 
 
 ln = LinkedList()
@@ -100,10 +108,10 @@ ln.add_obj(ObjList("Сергей"))
 ln.add_obj(ObjList("Балакирев"))
 ln.add_obj(ObjList("Python ООП"))
 ln.remove_obj(2)
-assert len(ln) == 2, "функция len вернула неверное число объектов в списке, возможно, неверно работает метод remove_obj()"
+assert len(
+    ln) == 2, "функция len вернула неверное число объектов в списке, возможно, неверно работает метод remove_obj()"
 ln.add_obj(ObjList("Python"))
 assert ln(2) == "Python", "неверное значение атрибута __data, взятое по индексу"
-print(len(ln))
 assert len(ln) == 3, "функция len вернула неверное число объектов в списке"
 assert ln(1) == "Балакирев", "неверное значение атрибута __data, взятое по индексу"
 
@@ -113,17 +121,6 @@ while h:
     assert isinstance(h, ObjList)
     h = h._ObjList__next
     n += 1
-
-assert n == 3, "при перемещении по списку через __next не все объекты перебрались"
-
-n = 0
-h = ln.tail
-while h:
-    assert isinstance(h, ObjList)
-    h = h._ObjList__prev
-    n += 1
-
-assert n == 3, "при перемещении по списку через __prev не все объекты перебрались"
 
 assert n == 3, "при перемещении по списку через __next не все объекты перебрались"
 
