@@ -74,33 +74,80 @@ class LinkedList:
             temporary_link.prev = self.tail
             self.tail = obj
 
+    def __get_obj_ind(self, ind):
+        h = self.head
+        n = 0
+        while h and n < ind:
+            h = h.next
+            n += 1
+        return h
     def remove_obj(self, ind):
-        if ind == 0 and self.head.next is self.tail:
-            self.head = self.tail
-            self.tail.prev = None
-        else:
-            self.head = self.head.next
-            if self.head is not None:
-                self.head.prev = None
-            if self.head is self.tail:
-                self.tail = None
-        if ind != 0:
-            ind_counter = self.head
-            counter = 0
-            while counter != ind:
-                ind_counter = ind_counter.next
-                counter += 1
-            if ind_counter is self.tail:
-                if self.tail.prev is self.head:
-                    self.tail = None
-                    self.head.next = None
-                self.tail = self.tail.prev
-                self.tail.next = None
-            else:
-                prev_object = ind_counter.prev
-                next_object = ind_counter.next
-                prev_object.next = next_object
-                next_object.prev = prev_object
+        obj = self.__get_obj_ind(ind)
+        if obj is None:
+            return
+        p, n = obj.prev, obj.next
+        if p:
+            p.next = n
+        if n:
+            n.prev = p
+        if self.head == obj:
+            self.head = n
+        if self.tail == obj:
+            self.tail = p
+
+    # def remove_obj(self, ind):
+    #     counter = 0
+    #     if self.head != None and self.tail != None:
+    #         if ind == 0 and self.tail is self.head.next:
+    #             self.head = self.tail
+    #             self.tail.prev = None
+    #         if ind == 0 and self.head.next is not self.tail:
+    #             self.head = self.head.next
+    #             #self.head.prev = None
+    #         if ind > 0:
+    #             ind_counter = self.head
+    #             while counter != ind:
+    #                 ind_counter = ind_counter.next
+    #                 counter += 1
+    #             if ind_counter is not self.tail:
+    #                 prev_object = ind_counter.prev
+    #                 next_object = ind_counter.next
+    #                 prev_object.next = next_object
+    #                 next_object.prev = prev_object
+    #             else:
+    #                 self.tail = self.tail.prev
+    #                 self.tail.next = None
+    #
+    #     else:
+    #         print("Список пуст")
+
+    # def remove_obj(self, ind):
+    #     if ind == 0 and self.head.next is self.tail:
+    #         self.head = self.tail
+    #         self.tail.prev = None
+    #     else:
+    #         self.head = self.head.next
+    #         if self.head is not None:
+    #             self.head.prev = None
+    #         if self.head is self.tail:
+    #             self.tail = None
+    #     if ind != 0:
+    #         ind_counter = self.head
+    #         counter = 0
+    #         while counter != ind:
+    #             ind_counter = ind_counter.next
+    #             counter += 1
+    #         if ind_counter is self.tail:
+    #             if self.tail.prev is self.head:
+    #                 self.tail = None
+    #                 self.head.next = None
+    #             self.tail = self.tail.prev
+    #             self.tail.next = None
+    #         else:
+    #             prev_object = ind_counter.prev
+    #             next_object = ind_counter.next
+    #             prev_object.next = next_object
+    #             next_object.prev = prev_object
 
 
 ln = LinkedList()
