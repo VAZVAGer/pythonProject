@@ -1,5 +1,6 @@
-ddd = [8, 66, 21]
+def qqq(*args):
+    print(*args)
 
-for i, zn in enumerate(ddd):
-    ddd.insert(i - 1, zn)
-print(ddd)
+
+
+qqq(5, 5 ,3 ,0)
