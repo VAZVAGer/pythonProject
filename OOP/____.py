@@ -1,6 +1,7 @@
-def qqq(*args):
-    print(*args)
+cord = [3, 5, 8, 9, 12]
+def set_coords(*args):
+    for i, n in enumerate(args[:len(cord)]):
+        cord[i] = n
 
-
-
-qqq(5, 5 ,3 ,0)
+set_coords(4,)
+print(cord)
