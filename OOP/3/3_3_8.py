@@ -14,13 +14,17 @@ class DeltaClock:
         self.clock2 = clock2
 
     def __str__(self):
-        sec = self.clock1.get_time - self.clock2.get_time
+        sec = self.__len__()
         sec = sec % (24 * 3600)
         hour = sec // 3600
         sec %= 3600
-        min = sec // 60
+        min1 = sec // 60
         sec %= 60
-        return f'часы: {str(hour).rjust(2, 0)}минуты: {str(min).rjust(2, 0)} секунды: {str(sec).rjust(2, 0)}'
+        return f'{hour:02}: {min1:02}: {sec:02}'
+
 
     def __len__(self):
-        return self.clock1.get_time - self.clock2.get_time
+        sec = self.clock1.get_time() - self.clock2.get_time()
+        if sec < 0:
+            return 0
+        return sec
