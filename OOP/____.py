@@ -1,5 +1,13 @@
-df = [(23, 7)]
-ww = ((7, 2), (8, 8), (8, 9))
+def subtraction(lst1, lst2):
+    list_sub = []
+    for i in lst1:
+        if i in lst2:
+            lst2.remove(i)
+        else:
+            list_sub.append(i)
+    return list_sub
 
-jj = df + list(ww)
-print(jj)
+
+l1 = [1, 2, 3, 4, 5, 6] #2 3 4
+l2 = [5, 6, 7, 8, 1]
+print(subtraction(l1, l2))
