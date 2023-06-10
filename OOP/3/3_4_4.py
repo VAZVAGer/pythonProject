@@ -12,3 +12,10 @@ class NewList:
             else:
                 list_sub.append(i)
         return list_sub
+
+    def __sub__(self, other):
+        if type(other) is NewList:
+            return NewList.subtraction(self.lst, other.self.lst)
+        elif type(other) == list:
+            return NewList.subtraction(self.lst, other)
+
