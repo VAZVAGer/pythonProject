@@ -13,3 +13,4 @@ class ListMath:
         for i, zn in enumerate(work_list):
             work_list[i] += other
         return ListMath(work_list)
+    list
