@@ -13,4 +13,25 @@ class ListMath:
         for i, zn in enumerate(work_list):
             work_list[i] += other
         return ListMath(work_list)
-    list
+
+    def __radd__(self, other):
+        return self + other
+
+    def __iadd__(self, other):
+        for i, zn in enumerate(self.lst_math):
+            self.lst_math[i] += other
+        return self
+
+    def __sub__(self, other):
+        work_list = self.lst_math
+        for i, zn in enumerate(work_list):
+            work_list[i] -= other
+        return ListMath(work_list)
+
+    def __rsub__(self, other):
+        return self - other
+
+    def __isub__(self, other):
+        for i, zn in enumerate(self.lst_math):
+            self.lst_math[i] -= other
+        return self
