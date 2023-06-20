@@ -35,3 +35,31 @@ class ListMath:
         for i, zn in enumerate(self.lst_math):
             self.lst_math[i] -= other
         return self
+
+    def __mul__(self, other):
+        work_list = self.lst_math
+        for i, zn in enumerate(work_list):
+            work_list[i] *= other
+        return ListMath(work_list)
+
+    def __rmul__(self, other):
+        return self * other
+
+    def __imul__(self, other):
+        for i, zn in enumerate(self.lst_math):
+            self.lst_math[i] *= other
+        return self
+
+    def __truediv__(self, other):
+        work_list = self.lst_math
+        for i, zn in enumerate(work_list):
+            work_list[i] /= other
+        return ListMath(work_list)
+
+    def __rtruediv__(self, other):
+        return self / other
+
+    def __itruediv__(self, other):
+        for i, zn in enumerate(self.lst_math):
+            self.lst_math[i] /= other
+        return self
