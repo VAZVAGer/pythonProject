@@ -24,4 +24,20 @@ class StackObj:
 class Stack:
     def __init__(self):
         self.top = None
+        self.end = None
+
+    def push_back(self, obj):  # Добавление в список
+        if self.top == None:
+            self.top = obj
+            self.end = obj
+        else:
+            self.end.next = obj
+            self.end = obj
+
+    def pop_back(self):  # удаление из списка
+        counter = self.top
+        while counter.next != self.end:
+            counter = counter.next
+        self.end = counter
+        counter.next = None
 
