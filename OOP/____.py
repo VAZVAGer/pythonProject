@@ -1,12 +1,12 @@
-res = [[1, 2, 3, 4],  # [[6, 8],
-       [5, 6, 7, 8],  # [9, 7]]
-       [9, 8, 7, 6],
-       [5, 4, 3, 2]]
+res = [[1, 10, 10, 12],
+      [5, 10, 0, -5],
+      [0, 1, 2, 300],
+      [40, -100, 0, 54.5]]
 size = (2, 2)
 step = (2, 2)
 
 
-def MaxPooling(matrix):
+def Max_Pooling(matrix):
     caunter = 0
     step_r = 0
     rezalt = []
@@ -26,7 +26,7 @@ def MaxPooling(matrix):
             rezalt[caunter_sector_2].append(max(sector))
             caunter_sector_2 += 1
 
-    return rezalt
+    print(rezalt)
 
 
-MaxPooling(res)
+Max_Pooling(res)
