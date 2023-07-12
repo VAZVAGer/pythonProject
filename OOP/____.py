@@ -7,19 +7,26 @@ step = (2, 2)
 
 
 def Max_Pooling(matrix):
-    rezalt = []
-    rezalt_1 = []
+    matrix_pattern = []
+    list_values = []
     for ind_step_right in range(0, len(matrix[0]), step[-1]):
-        rezalt.append([])
+        matrix_pattern.append([])
         for ind_step_down in range(0, len(matrix), step[0]):
             sector = []
             sector.append(max(matrix[ind_step_down][ind_step_right:ind_step_right + size[0]]))   # первая строчка чектора
             for ind_size in range(ind_step_down + 1, size[-1] + ind_step_down): # последующие строки сектора
                 if ind_size < len(matrix):
                     sector.append(max(matrix[ind_size][ind_step_right:ind_step_right + size[0]]))
-            rezalt_1.append(max(sector))
-    print(rezalt, rezalt_1)
-    print(rezalt_1[:len(rezalt)])
+            list_values.append(max(sector))
+    print(matrix_pattern, list_values)
+    counter = 0
+    counter_2 = 0
+    while counter_2 < len(list_values):
+        counter += counter_2
+        for ind, ls in enumerate(matrix_pattern):
+            ls.append(list_values[counter_2])
+            counter_2 += 1
+    print(matrix_pattern)
 
 
 
