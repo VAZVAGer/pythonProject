@@ -8,29 +8,36 @@ class MaxPooling:
     def __init__(self, step=(2, 2), size=(2, 2)):
         self.step = step
         self.size = size
+
     def Max_Pooling(self, matrix):
-        caunter = 0
-        step_r = 0
-        rezalt = []
-        caunter_sector = 0
-        caunter_sector_2 = 0
-        while caunter != len(matrix) and step_r < len(matrix):
-            sector = []
-            try:
-                for indX in range(caunter, caunter + self.size[-1]):  # строки перебирает
-                    sector += matrix[indX][step_r:self.size[0] + step_r]
-            except:
-                break
-            caunter += self.step[0]
-            if caunter_sector < len(matrix):
-                rezalt.append([max(sector)])
-                caunter_sector += self.step[0]
-            if caunter == len(matrix):
-                caunter = 0
-                step_r += self.step[-1]
-                rezalt[caunter_sector_2].append(max(sector))
-                caunter_sector_2 += 1
-        return rezalt
+        matrix_pattern = []
+        list_values = []
+        for ind_step_right in range(0, len(matrix[0]), self.step[-1]):
+            matrix_pattern.append([])
+            for ind_step_down in range(0, len(matrix), self.step[0]):
+                sector = []
+                if len(matrix[ind_step_down][ind_step_right:ind_step_right + self.size[0]]) != self.size[0]:
+                    matrix_pattern.pop()
+                    break
+                else:
+                    sector.append(
+                        max(matrix[ind_step_down][ind_step_right:ind_step_right + self.size[0]]))  # первая строчка чектора
+                    for ind_size in range(ind_step_down + 1, self.size[-1] + ind_step_down):  # последующие строки сектора
+                        if ind_size < len(matrix):
+                            sector.append(max(matrix[ind_size][ind_step_right:ind_step_right + self.size[0]]))
+
+                if len(sector) == self.size[-1]:
+                    list_values.append(max(sector))
+
+
+        counter = 0
+        counter_2 = 0
+        while counter_2 < len(list_values):
+            counter += counter_2
+            for ind, ls in enumerate(matrix_pattern):
+                ls.append(list_values[counter_2])
+                counter_2 += 1
+        return matrix_pattern
     def __call__(self, matrix, *args, **kwargs):
         for indx in range(len(matrix)-1):
             if len(matrix[indx]) != len(matrix[indx + 1]):
