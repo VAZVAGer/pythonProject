@@ -30,6 +30,7 @@ class MaxPooling:
                     list_values.append(max(sector))
 
 
+
         counter = 0
         counter_2 = 0
         while counter_2 < len(list_values):
