@@ -57,7 +57,7 @@ lst_shop = [ShopItem("кеды", 1024, Dimensions(40, 30, 120)),
             ShopItem("холодильник", 40000, Dimensions(2000, 600, 500)),
             ShopItem("табуретка", 2000, Dimensions(500, 200, 200))]
 
-lst_shop_sorted = sorted(lst_shop, lst_shop_sorted = sorted(lst_shop, key=lambda x: x.dim.volume()))
+lst_shop_sorted = sorted(lst_shop, key=lambda x: x.dim)
 
 assert len(lst_shop) == 4, "число элементов в lst_shop не равно 4"
 
