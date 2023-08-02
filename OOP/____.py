@@ -1,9 +1,3 @@
-filenames = "boat.jpg"
-
-ff = filenames[filenames.rfind('.')+1::]
-print(ff)
-
-
-
+rates = {'rub': 72.5, 'dollar': 1.0, 'euro': 1.15}
 
 
