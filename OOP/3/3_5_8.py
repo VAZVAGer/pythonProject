@@ -9,21 +9,20 @@ class CentralBank:
         money.cb = CentralBank
 
 
-class MoneyR:
-    currency = 'rub'
+class Money:
+    type_m = None
 
     def __init__(self, vol=0):
-        self.volum = vol
-        self.cb = None
+        self.__volume = vol
+        self.__cb = None
 
     @property
-    def volum(self):
-        return self.__volum
+    def volume(self):
+        return self.__volume
 
-    @volum.setter
-    def volum(self, zn):
-        if type(zn) == int or type(zn) == float:
-            self.__volum = zn
+    @volume.setter
+    def volume(self, zn):
+        self.__volume = zn
 
     @property
     def cb(self):
@@ -33,79 +32,49 @@ class MoneyR:
     def cb(self, zn):
         self.__cb = zn
 
-    def __lt__(self, other):
-        return self.volum / self.cb.rates[self.currency] < other.volum / other.cb.rates[self.currency]
-
+    # def get_v(self, other):
+    #     if self.cb is None:
+    #         raise ValueError("Неизвестен курс валют.")
+    #     if self.type_m is None:
+    #         raise ValueError('Неизвестен тип кошелька')
+    #     v1 = self.volume / self.cb.rates[self.type_m]
+    #     v2 = other.volume / other.cb.rates[other.type_m]
+    #     return v1 , v2
     def __eq__(self, other):
-        return self.volum / self.cb.rates[self.currency] == other.volum / other.cb.rates[self.currency]
+        if self.cb is None:
+            raise ValueError("Неизвестен курс валют.")
+        if self.type_m is None:
+            raise ValueError('Неизвестен тип кошелька')
+        return abs(self.volume / self.cb.rates[self.type_m] - other.volume / other.cb.rates[other.type_m]) < 0.1
+    def __lt__(self, other):
+        if self.cb is None:
+            raise ValueError("Неизвестен курс валют.")
+        if self.type_m is None:
+            raise ValueError('Неизвестен тип кошелька')
+        return self.volume / self.cb.rates[self.type_m] < other.volume / other.cb.rates[other.type_m]
 
     def __le__(self, other):
-        return self.volum / self.cb.rates[self.currency] <= other.volum / other.cb.rates[self.currency]
+        if self.cb is None:
+            raise ValueError("Неизвестен курс валют.")
+        if self.type_m is None:
+            raise ValueError('Неизвестен тип кошелька')
+        return self.volume / self.cb.rates[self.type_m] <= other.volume / other.cb.rates[other.type_m]
+
+class MoneyR(Money):
+    type_m = "rub"
+class MoneyD(Money):
+    type_m = "dollar"
+class MoneyE(Money):
+    type_m = "euro"
 
 
-class MoneyD:
-    currency = 'dollar'
+r = MoneyR(500)
+d = MoneyD(500)
 
-    def __init__(self, vol=0):
-        self.volum = vol
-        self.cb = None
+CentralBank.register(r)
+CentralBank.register(d)
 
-    @property
-    def volum(self):
-        return self.__volum
-
-    @volum.setter
-    def volum(self, zn):
-        if type(zn) == int or type(zn) == float:
-            self.__volum = zn
-
-    @property
-    def cb(self):
-        return self.__cd
-
-    @cb.setter
-    def cb(self, zn):
-        self.__cb = zn
-
-    def __lt__(self, other):
-        return self.volum / self.cb.rates[self.currency] < other.volum / other.cb.rates[self.currency]
-
-    def __eq__(self, other):
-        return self.volum / self.cb.rates[self.currency] == other.volum / other.cb.rates[self.currency]
-
-    def __le__(self, other):
-        return self.volum / self.cb.rates[self.currency] <= other.volum / other.cb.rates[self.currency]
-
-
-class MoneyE:
-    currency = 'euro'
-
-    def __init__(self, vol=0):
-        self.volum = vol
-        self.cb = None
-
-    @property
-    def volum(self):
-        return self.__volum
-
-    @volum.setter
-    def volum(self, zn):
-        if type(zn) == int or type(zn) == float:
-            self.__volum = zn
-
-    @property
-    def cb(self):
-        return self.__cb
-
-    @cb.setter
-    def cb(self, zn):
-        self.__cb = zn
-
-    def __lt__(self, other):
-        return self.volum / self.cb.rates[self.currency] < other.volum / other.cb.rates[self.currency]
-
-    def __eq__(self, other):
-        return self.volum / self.cb.rates[self.currency] == other.volum / other.cb.rates[self.currency]
-
-    def __le__(self, other):
-        return self.volum / self.cb.rates[self.currency] <= other.volum / other.cb.rates[self.currency]
+if r < d:
+    print("неплохо")
+else:
+    print("нужно поднажать")
