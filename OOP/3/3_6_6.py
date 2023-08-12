@@ -8,7 +8,7 @@ class ShopItem:
         self.price = price
 
     def __hash__(self):
-        return hash(self.name.lower() + self.weight + self.price)
+        return hash(self.name.lower()) + hash(self.weight) + hash(self.price)
 
     def __eq__(self, other):
         return hash(self) == hash(other)
@@ -17,6 +17,7 @@ class ShopItem:
 lst_in = ['Системный блок: 1500 75890.56', 'Монитор Samsung: 2000 34000', 'Клавиатура: 200.44 545',
           'Монитор Samsung: 2000 34000']  # list(map(str.strip, sys.stdin.readlines()))
 shop_items = {}
+
 
 def object_creator(list_in):
     list_obj = []
@@ -32,48 +33,10 @@ def object_creator(list_in):
         for odj2 in list_obj:
             if odj == odj2:
                 counter_of_identical_objects += 1
+        shop_items[odj] = [odj, counter_of_identical_objects]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+object_creator(lst_in)
 
 it1 = ShopItem('name', 10, 11)
 it2 = ShopItem('name', 10, 11)
