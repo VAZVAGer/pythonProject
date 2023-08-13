@@ -14,3 +14,8 @@ def object_creator(list_in):
 
 
 object_creator(lst_in)
+
+{<__main__.ShopItem object at 0x000001876A1B3490>: [<__main__.ShopItem object at 0x000001876A1B3490>, 0],
+<__main__.ShopItem object at 0x000001876A1B3550>: [<__main__.ShopItem object at 0x000001876A1B36D0>, 1],
+<__main__.ShopItem object at 0x000001876A1B3610>: [<__main__.ShopItem object at 0x000001876A1B3610>, 0]}
+

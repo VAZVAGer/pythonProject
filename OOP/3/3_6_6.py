@@ -29,11 +29,12 @@ def object_creator(list_in):
         price = nam1[-1]
         list_obj.append(ShopItem(name, weight, price))
     for odj in list_obj:
-        counter_of_identical_objects = -1
+        counter_of_identical_objects = 0
         for odj2 in list_obj:
             if odj == odj2:
                 counter_of_identical_objects += 1
         shop_items[odj] = [odj, counter_of_identical_objects]
+
 
 
 object_creator(lst_in)
@@ -57,6 +58,8 @@ for sp in shop_items.values():
                                                     1]) == int, "в значениях словаря shop_items первый элемент должен быть объектом класса ShopItem, а второй - целым числом"
 
 v = list(shop_items.values())
+
+
 if v[0][0].name.strip() == "Системный блок":
     assert v[0][1] == 1 and v[1][1] == 2 and v[2][1] == 1 and len(v) == 3, "неверные значения в словаре shop_items"
 
