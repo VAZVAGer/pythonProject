@@ -1,4 +1,4 @@
-import random
+
 
 
 class DataBase:
@@ -17,33 +17,35 @@ class DataBase:
 
 
 class Record:
+    r_c = 0
     def __init__(self, fio, descr, old):
-        self.fio = fio,
-        self.descr = descr,
-        self.old = old,
-        self.pk = random.randint(0, 99999999)
+        self.fio = fio
+        self.descr = descr
+        self.old = old
+        self.pk = self.__count()
+    @classmethod
+    def __count(cls):
+        cls.r_c += 1
+        return cls.r_c
 
     def __hash__(self):
-        return hash(self.fio) + hash(self.old)
+        return hash((self.fio.lower(), self.old))
 
     def __eq__(self, other):
         return hash(self) == hash(other)
 
 
-def rec_obg(data):
-    obj_lst = []
-    for obj_info in data:
-        info = obj_info.split(";")
-        obj_lst.append(Record(info[0], info[1], int(info[-1])))
-    return obj_lst
+
 
 
 lst_in = ['Балакирев С.М.; программист; 33', 'Кузнецов Н.И.; разведчик-нелегал; 35', 'Суворов А.В.; полководец; 42',
           'Иванов И.И.; фигурант всех подобных списков; 26', 'Балакирев С.М.; преподаватель; 33']
 
 db = DataBase("gvdfvbsdf")
-for obj in rec_obg(lst_in):
-    db.write(obj)
+for l in lst_in:
+    args = list(map(str.strip, l.split(";")))
+    args[-1] = int(args[-1])
+    db.write(Record(*args))
 
 db22345 = DataBase('123')
 r1 = Record('fio', 'descr', 10)
