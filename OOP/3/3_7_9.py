@@ -12,44 +12,48 @@ class Vector:
         self.dimensional_check(other)
         for ind, i1 in enumerate(self.cord_vector):
             add_cord_vector.append(other.cord_vector[ind] + i1)
-        return Vector(tuple(add_cord_vector))
+        return Vector(*add_cord_vector)
 
     def __sub__(self, other):
         sub_cord_vector = []
         self.dimensional_check(other)
         for ind, i1 in enumerate(self.cord_vector):
             sub_cord_vector.append(i1 - other.cord_vector[ind])
-        return Vector(tuple(sub_cord_vector))
+        return Vector(*sub_cord_vector)
 
     def __mul__(self, other):
         mul_cord_vector = []
         self.dimensional_check(other)
         for ind, i1 in enumerate(self.cord_vector):
             mul_cord_vector.append(other.cord_vector[ind] * i1)
-        return Vector(tuple(mul_cord_vector))
+        return Vector(*mul_cord_vector)
 
     def __iadd__(self, other):
+        temp_lst = list(self.cord_vector)
         if type(other) == Vector:
             self.dimensional_check(other)
             for ind, i1 in enumerate(self.cord_vector):
-                self.cord_vector[ind] == i1 + other.cord_vector[ind]
+                temp_lst[ind] = i1 + other.cord_vector[ind]
+            self.cord_vector = tuple(temp_lst)
 
         elif type(other) == int:
             for ind, i1 in enumerate(self.cord_vector):
-                self.cord_vector[ind] == i1 + other
-
+                temp_lst[ind] = i1 + other
+            self.cord_vector = tuple(temp_lst)
         return self
 
     def __isub__(self, other):
+        temp_lst = list(self.cord_vector)
         if type(other) == Vector:
             self.dimensional_check(other)
             for ind, i1 in enumerate(self.cord_vector):
-                self.cord_vector[ind] == i1 - other.cord_vector[ind]
+                temp_lst[ind] = i1 - other.cord_vector[ind]
+            self.cord_vector = tuple(temp_lst)
 
         elif type(other) == int:
             for ind, i1 in enumerate(self.cord_vector):
-                self.cord_vector[ind] == i1 - other
-
+                temp_lst[ind] = i1 - other
+            self.cord_vector = tuple(temp_lst)
         return self
 
     def __eq__(self, other):
@@ -71,3 +75,9 @@ class Vector:
                     return True
                 else:
                     return False
+
+
+v1 = Vector(1, 2, 3)
+v2 = Vector(1, 2, 3, 0)
+
+print(v1 != v2)
