@@ -3,9 +3,9 @@ import random
 
 class Cell:
     def __init__(self, is_mine=False, number=0, is_open=False):
-        self.__is_mine = is_mine  # True - в клетке находится мина, False - мина отсутствует;
-        self.__number = number  # число мин вокруг клетки (целое число от 0 до 8);
-        self.__is_open = is_open  # флаг того, открыта клетка или закрыта: True - открыта; False - закрыта.
+        self.is_mine = is_mine  # True - в клетке находится мина, False - мина отсутствует;
+        self.number = number  # число мин вокруг клетки (целое число от 0 до 8);
+        self.is_open = is_open  # флаг того, открыта клетка или закрыта: True - открыта; False - закрыта.
 
     @property
     def is_mine(self):
@@ -39,4 +39,8 @@ class Cell:
         else:
             raise ValueError("недопустимое значение атрибута")
 
-
+    def __bool__(self):
+        if self.is_open == True:
+            return False
+        elif self.is_open == False:
+            return True
