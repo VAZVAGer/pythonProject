@@ -41,9 +41,8 @@ class Cell:
             return False
         elif self.is_open == False:
             return True
-
-def top(N, M):
-    pole_cells = tuple(tuple("Cell()" for _ in range(N)) for _ in range(M))
+def v(N, M):
+    pole_cells = tuple(tuple("Cell()" for _ in range(M)) for _ in range(N))
     print(pole_cells)
 
 
@@ -57,4 +56,4 @@ def top(N, M):
 
 
 
-top(2, 3)
+v(2, 3)

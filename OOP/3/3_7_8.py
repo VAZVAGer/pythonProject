@@ -81,12 +81,11 @@ class GamePole:
             else:
                 continue
 
-        indx = (-1, 1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)
-        for X in range(self.N-1):
-            for Y in range(self.M-1):
+        indx = (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)
+        for X in range(self.N):
+            for Y in range(self.M):
                 if not self.pole[X][Y].is_mine:
-                    mines = sum((self.pole[X + i][Y + j].is_mine for i, j in indx if
-                                 0 <= X + i < self.N and 0 <= Y + j < self.M))
+                    mines = sum((self.pole[X + i][Y + j].is_mine for i, j in indx if 0 <= X + i < self.N and 0 <= Y + j < self.M))
                     self.pole[X][Y].number = mines
 
     def open_cell(self, i, j):
