@@ -8,6 +8,7 @@ class Stack:
     def __init__(self):
         self.top = None
         self.last = None
+        self.length = -1
 
     def push(self, obj):
         new_obj = obj
@@ -19,15 +20,24 @@ class Stack:
         else:
             self.last.next = new_obj
             self.last = new_obj
+        self.length += 1
 
     def pop(self):
+        ret = self.last
         counter = self.top
         while counter.next != self.last:
             counter = counter.next
         self.last = counter
         counter.next = None
+        self.length -= 1
+        return ret
+
+    def check(self, indX):
+        if type(indX) != int or indX < 0 or indX > self.length:
+            raise IndexError('неверный индекс')
 
     def __getitem__(self, item):
+        self.check(item)
         count = 0
         counter_obj = self.top
         if item == 0:
@@ -39,6 +49,7 @@ class Stack:
             return counter_obj
 
     def __setitem__(self, key, value):
+        self.check(key)
         _ = self.top
         count = 0
         counter_obj = self.top
@@ -48,7 +59,7 @@ class Stack:
             self.top = value
             self.top.next = _
         else:
-            while key -1 > count:
+            while key - 1 > count:
                 counter_obj = counter_obj.next
                 count += 1
             _1 = counter_obj.next
@@ -60,18 +71,13 @@ class Stack:
             _1.next = _2
 
 
-
-
-
-
-
-
 st = Stack()
 st.push(StackObj("obj11"))
 st.push(StackObj("obj12"))
 st.push(StackObj("obj13"))
 st[1] = StackObj("obj2-new")
-assert st[0].data == "obj11" and st[1].data == "obj2-new", "атрибут data объекта класса StackObj содержит неверные данные"
+assert st[0].data == "obj11" and st[
+    1].data == "obj2-new", "атрибут data объекта класса StackObj содержит неверные данные"
 
 try:
     obj = st[3]
