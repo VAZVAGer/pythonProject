@@ -1,19 +1,25 @@
 class TriangleListIterator:
     def __init__(self, lst):
         self.lst = lst
-        self.row = 0
-        self.element = 1
+
 
 
     def __iter__(self):
+        self.row = 0
+        self.element = 0
         return self
 
     def __next__(self):
-        if self.row <= len(self.lst) - 1:
-            self.line = self.lst[self.row][:self.element]
+        if self.row == self.element:
+            value = self.lst[self.row][self.element]
             self.row += 1
+            self.element = 0
+            return value
+        elif self.row > self.element and self.row < len(self.lst):
+            value1 = self.lst[self.row][self.element]
             self.element += 1
-            return self.line
+            return value1
+
         else:
             raise StopIteration
 
