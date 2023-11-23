@@ -36,7 +36,6 @@ class TableValues:
         for row in self.table:
             yield (x.data for x in row)
 
-
 tb = TableValues(3, 2)
 n = m = 0
 for row in tb:
