@@ -30,3 +30,7 @@ class Matrix:
             raise TypeError('значения матрицы должны быть числами')
         ind1, ind2 = key
         self.__matriX[ind1][ind2] = value
+
+    def __eq__(self, other):
+        return len(self) == len(other)
+
