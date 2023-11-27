@@ -7,7 +7,6 @@ class Matrix:
                 if not isinstance(element, (int, float)):
                     raise TypeError('список должен быть прямоугольным, состоящим из чисел')
 
-
     def __init__(self, *args):
         if len(args) == 3:
             if type(args[0]) != int or type(args[1]) != int or isinstance(args[2], (int, float)):
@@ -34,3 +33,43 @@ class Matrix:
     def __eq__(self, other):
         return len(self) == len(other)
 
+    def __add__(self, other):
+        new_matrix = []
+        if type(other) == Matrix:
+            if self != other:
+                raise ValueError('операции возможны только с матрицами равных размеров')
+            for ind_1, line in enumerate(self):
+                new_line_matrix = []
+                for ind_2, value in enumerate(line):
+                    new_value = self[ind_1][ind_2] + other[ind_1][ind_2]
+                    new_line_matrix.append(new_value)
+                new_matrix.append(new_line_matrix)
+            return new_matrix
+        elif isinstance(other, (int, float)):
+            for ind_1, line in enumerate(self):
+                new_line_matrix = []
+                for ind_2, value in enumerate(line):
+                    new_value = self[ind_1][ind_2] + other
+                    new_line_matrix.append(new_value)
+                new_matrix.append(new_line_matrix)
+            return new_matrix
+    def __sub__(self, other):
+        new_matrix = []
+        if type(other) == Matrix:
+            if self != other:
+                raise ValueError('операции возможны только с матрицами равных размеров')
+            for ind_1, line in enumerate(self):
+                new_line_matrix = []
+                for ind_2, value in enumerate(line):
+                    new_value = self[ind_1][ind_2] - other[ind_1][ind_2]
+                    new_line_matrix.append(new_value)
+                new_matrix.append(new_line_matrix)
+            return new_matrix
+        elif isinstance(other, (int, float)):
+            for ind_1, line in enumerate(self):
+                new_line_matrix = []
+                for ind_2, value in enumerate(line):
+                    new_value = self[ind_1][ind_2] - other
+                    new_line_matrix.append(new_value)
+                new_matrix.append(new_line_matrix)
+            return new_matrix
