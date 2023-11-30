@@ -10,18 +10,24 @@ class Matrix:
 
     def __init__(self, *args):
         if len(args) == 3:
-            if type(args[0]) != int or type(args[1]) != int or isinstance(args[2], (int, float)):
+            if type(args[0]) != int or type(args[1]) != int and isinstance(args[2], (int, float)):
                 raise TypeError('аргументы rows, cols - целые числа; fill_value - произвольное число')
             self.__rows = args[0]
             self.__cols = args[1]
             self.__matriX = list(list(args[2] for _ in range(self.__cols)) for _ in range(self.__rows))
         elif len(args) == 1:
             self.cheack_list2D(args[0])
-            self.__matriX = [args]
+            self.__matriX = args[0]
+
+    def __len__(self):
+        return len(self.__matriX)
 
     def __getitem__(self, item):
+        if type(item) == int:
+            return self.__matriX[item]
         ind1, ind2 = item
-        if 0 > ind1 > len(self.__matriX) or 0 > ind2 > len(self.__matriX[ind1]):
+        if (not isinstance(ind1, int) or not isinstance(ind2, int) or not (0 <= ind1 <= len(self.__matriX) - 1) or
+        not (0 <= ind2 <= len(self.__matriX[ind1]) - 1)):
             raise IndexError('недопустимые значения индексов')
         return self.__matriX[ind1][ind2]
 
@@ -45,7 +51,7 @@ class Matrix:
                     new_value = self[ind_1][ind_2] + other[ind_1][ind_2]
                     new_line_matrix.append(new_value)
                 new_matrix.append(new_line_matrix)
-            return new_matrix
+            return Matrix(new_matrix)
         elif isinstance(other, (int, float)):
             for ind_1, line in enumerate(self):
                 new_line_matrix = []
@@ -53,7 +59,7 @@ class Matrix:
                     new_value = self[ind_1][ind_2] + other
                     new_line_matrix.append(new_value)
                 new_matrix.append(new_line_matrix)
-            return new_matrix
+            return Matrix(new_matrix)
 
     def __sub__(self, other):
         new_matrix = []
@@ -66,7 +72,7 @@ class Matrix:
                     new_value = self[ind_1][ind_2] - other[ind_1][ind_2]
                     new_line_matrix.append(new_value)
                 new_matrix.append(new_line_matrix)
-            return new_matrix
+            return Matrix(new_matrix)
         elif isinstance(other, (int, float)):
             for ind_1, line in enumerate(self):
                 new_line_matrix = []
@@ -74,7 +80,8 @@ class Matrix:
                     new_value = self[ind_1][ind_2] - other
                     new_line_matrix.append(new_value)
                 new_matrix.append(new_line_matrix)
-            return new_matrix
+            return Matrix(new_matrix)
+
 
 list2D = [[1, 2], [3, 4], [5, 6, 7]]
 try:

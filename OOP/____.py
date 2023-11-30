@@ -1,5 +1,5 @@
+ind1 = 3
+ind2 = 1
 
-type_data = int
-value = 0.1
-
-print(type(value) == type_data)
+if not (0 <= ind1 <= 3) or not (0 <= ind2 <= 4):
+    print('недопустимые значения индексов')
