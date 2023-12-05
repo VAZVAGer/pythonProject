@@ -1,3 +1,4 @@
+import random
 class Cell:
     def __init__(self):
         self.value = 0
@@ -53,6 +54,16 @@ class TicTacToe:
         d = cord.split()
         X = int(d[0])
         Y = int(d[-1])
+        if self[X, Y] == self.FREE_CELL:
+            self[X, Y] = self.HUMAN_X
+            self.show()
+        else:
+            self.show()
+            print("Клетка занята, выбери другую")
+            self.human_go()
+    def computer_go(self):
+        pass
+
 
 
 
