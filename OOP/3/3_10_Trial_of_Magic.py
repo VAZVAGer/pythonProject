@@ -50,17 +50,14 @@ class TicTacToe:
                     show_pole[X][Y].append("0")
         print(show_pole)
     def human_go(self):
+        self.show()
         cord = input(f"Введите координаты X и Y, от 0 до {self.SIZE} через пробез")
         d = cord.split()
         X = int(d[0])
         Y = int(d[-1])
-        if self[X, Y] == self.FREE_CELL:
-            self[X, Y] = self.HUMAN_X
-            self.show()
-        else:
-            self.show()
-            print("Клетка занята, выбери другую")
-            self.human_go()
+        self[X, Y] = self.HUMAN_X
+        self.show()
+
     def computer_go(self):
         pass
 
