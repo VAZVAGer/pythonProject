@@ -1,6 +1,6 @@
-ind1 = 3
-ind2 = 1
+st = "2 7"
 
-if not (0 <= ind1 <= 3) or not (0 <= ind2 <= 4):
-    print('недопустим'
-          'ые значения индексов')
+d = st.split()
+X = int(d[0])
+Y = int(d[-1])
+print(X, Y)

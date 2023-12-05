@@ -38,9 +38,24 @@ class TicTacToe:
         self.pole = tuple(tuple(Cell() for _ in range(self.SIZE)) for _ in range(self.SIZE))
 
     def show(self):
-        self.show_pole = list(list([] for _ in range(self.SIZE)) for _ in range(self.SIZE))
-        for line in self.pole:
-            for zn in line:
+        show_pole = list(list([] for _ in range(self.SIZE)) for _ in range(self.SIZE))
+        for X, line in enumerate(self.pole):
+            for Y, zn in enumerate(line):
+                if zn.value == self.FREE_CELL:
+                    show_pole[X][Y].append(" ")
+                elif zn.value == self.HUMAN_X:
+                    show_pole[X][Y].append("X")
+                elif zn.value == self.COMPUTER_O:
+                    show_pole[X][Y].append("0")
+        print(show_pole)
+    def human_go(self):
+        cord = input(f"Введите координаты X и Y, от 0 до {self.SIZE} через пробез")
+        d = cord.split()
+        X = int(d[0])
+        Y = int(d[-1])
+
+
+
 
 
 
