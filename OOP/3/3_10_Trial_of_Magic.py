@@ -48,18 +48,28 @@ class TicTacToe:
                     show_pole[X][Y].append("X")
                 elif zn.value == self.COMPUTER_O:
                     show_pole[X][Y].append("0")
-        print(show_pole)
+        for LINE in show_pole:
+            print(LINE)
     def human_go(self):
         self.show()
         cord = input(f"Введите координаты X и Y, от 0 до {self.SIZE} через пробез")
         d = cord.split()
         X = int(d[0])
         Y = int(d[-1])
-        self[X, Y] = self.HUMAN_X
+        self.pole[X, Y] = self.HUMAN_X
         self.show()
 
     def computer_go(self):
-        pass
+        walk = 0
+        while walk == 0:
+            random_X = random.uniform(0, self.SIZE)
+            random_Y = random.uniform(0, self.SIZE)
+            if self.pole[random_X][random_X] == self.FREE_CELL:
+                self.pole[random_X][random_X] = self.COMPUTER_O
+                walk = 8
+        self.show()
+
+
 
 
 
