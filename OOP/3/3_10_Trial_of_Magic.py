@@ -56,7 +56,7 @@ class TicTacToe:
         d = cord.split()
         X = int(d[0])
         Y = int(d[-1])
-        self.pole[X, Y] = self.HUMAN_X
+        self[X, Y] = self.HUMAN_X
         self.show()
 
     def computer_go(self):
@@ -68,6 +68,9 @@ class TicTacToe:
                 self.pole[random_X][random_X] = self.COMPUTER_O
                 walk = 8
         self.show()
+    @property
+    def is_human_win(self):
+        pass
 
 
 
