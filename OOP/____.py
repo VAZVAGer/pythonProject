@@ -1,6 +1,6 @@
 matrix = [["X", " ", "X"],
-          [" ", "X", "0"],
-          ["X", "X", "X"]]
+          ["0", "X", "0"],
+          [" ", "X", "X"]]
 
 
 def is_human_win():
@@ -36,7 +36,15 @@ def is_human_win():
     if False not in count_lict:
         print("True")
         return
-
+    count_lict = []
+    for nom_maynas, line in enumerate(matrix): # Права діагональ
+        if line[(nom_maynas * (-1)) - 1] == "X":
+            count_lict.append(True)
+        else:
+            count_lict.append(False)
+    if False not in count_lict:
+        print("True")
+        return
 
     print("False")
     return
