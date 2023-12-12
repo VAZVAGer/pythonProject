@@ -1,6 +1,6 @@
-matrix = [[" ", "X", "X"],
-          ["X", " ", "0"],
-          ["X", "X", " "]]
+matrix = [["X", " ", "X"],
+          [" ", "X", "0"],
+          ["X", "X", "X"]]
 
 
 def is_human_win():
@@ -28,14 +28,14 @@ def is_human_win():
             print("True")
             return
         count_lict = []
-    for nom, line in enumerate(matrix):
+    for nom, line in enumerate(matrix): # Ліва діагональ
         if line[nom] == "X":
             count_lict.append(True)
         else:
             count_lict.append(False)
-        if False not in count_lict:
-            print("True")
-            return
+    if False not in count_lict:
+        print("True")
+        return
 
 
     print("False")
