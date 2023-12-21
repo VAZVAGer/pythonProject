@@ -7,8 +7,7 @@ def is_human_win():
     count_lict = []
     l = 0
     s = 0
-    d = 0
-    d_ = -1
+
     for line in matrix:  # Перевіряемо строки
         if "0" not in line and " " not in line:
             print("True")
