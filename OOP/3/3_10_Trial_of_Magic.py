@@ -38,6 +38,9 @@ class TicTacToe:
 
     def init(self):
         self.pole = tuple(tuple(Cell() for _ in range(self.SIZE)) for _ in range(self.SIZE))
+        self.is_human_win = False
+        self.is_computer_win = False
+        self.is_draw = False
 
     def show(self):
         show_pole = list(list([] for _ in range(self.SIZE)) for _ in range(self.SIZE))
@@ -80,14 +83,14 @@ class TicTacToe:
         s = 0
 
         for line in show_pole:  # Перевіряемо строки
-            if "0" not in line and " " not in line:
-                print("True")
-                return
+            if ["0"] not in line and [" "] not in line:
+
+                return True
             else:
                 pass
         while s != len(show_pole):  # Перевіряємо стовпчики
             while l != len(show_pole):
-                if show_pole[l][s] == 'X':
+                if show_pole[l][s] == ['X']:
                     count_lict.append(True)
                 else:
                     count_lict.append(False)
@@ -95,29 +98,29 @@ class TicTacToe:
             s += 1
             l = 0
             if False not in count_lict:
-                print("True")
-                return
+
+                return True
             count_lict = []
         for nom, line in enumerate(show_pole):  # Ліва діагональ
-            if line[nom] == "X":
+            if line[nom] == ["X"]:
                 count_lict.append(True)
             else:
                 count_lict.append(False)
         if False not in count_lict:
-            print("True")
-            return
+            return True
         count_lict = []
         for nom_maynas, line in enumerate(show_pole):  # Права діагональ
-            if line[(nom_maynas * (-1)) - 1] == "X":
+            if line[(nom_maynas * (-1)) - 1] == ["X"]:
                 count_lict.append(True)
             else:
                 count_lict.append(False)
         if False not in count_lict:
-            print("True")
-            return
+            return True
 
-        print("False")
-        return
+        return False
+    @is_human_win.setter
+    def is_human_win(self, value):
+        return value
 
     @property
     def is_computer_win(self):
@@ -127,14 +130,14 @@ class TicTacToe:
         s = 0
 
         for line in show_pole:  # Перевіряемо строки
-            if "X" not in line and " " not in line:
-                print("True")
-                return
+            if ["X"] not in line and [" "] not in line:
+
+                return True
             else:
                 pass
         while s != len(show_pole):  # Перевіряємо стовпчики
             while l != len(show_pole):
-                if show_pole[l][s] == 'O':
+                if show_pole[l][s] == ['O']:
                     count_lict.append(True)
                 else:
                     count_lict.append(False)
@@ -142,39 +145,91 @@ class TicTacToe:
             s += 1
             l = 0
             if False not in count_lict:
-                print("True")
-                return
+
+                return True
             count_lict = []
         for nom, line in enumerate(show_pole):  # Ліва діагональ
-            if line[nom] == "O":
+            if line[nom] == ["O"]:
                 count_lict.append(True)
             else:
                 count_lict.append(False)
         if False not in count_lict:
-            print("True")
-            return
+            return True
         count_lict = []
         for nom_maynas, line in enumerate(show_pole):  # Права діагональ
-            if line[(nom_maynas * (-1)) - 1] == "O":
+            if line[(nom_maynas * (-1)) - 1] == ["O"]:
                 count_lict.append(True)
             else:
                 count_lict.append(False)
         if False not in count_lict:
-            print("True")
-            return
+            return True
 
-        print("False")
-        return
+
+        return False
+    @is_computer_win.setter
+    def is_computer_win(self, value):
+        return value
+
 
     @property
     def is_draw(self):
-        if self.is_human_win == self.is_computer_win:
+        if self.is_human_win == self.is_computer_win == True:
+            return True
+        else:
+            return False
+    @is_draw.setter
+    def is_draw(self, value):
+        return value
+    def __bool__(self):
+        for line in self.show():
+            if [" "] in line:
+                QQ = True
+        if (self.is_human_win == False and self.is_computer_win == False) and QQ == True:
             return True
         else:
             return False
 
-    def __bool__(self):
-        if (self.is_human_win == False or self.is_computer_win == False) and self.show() in " ":
-            return True
-        else:
-            return False
+
+cell = Cell()
+assert cell.value == 0, "начальное значение атрибута value объекта класса Cell должно быть равно 0"
+assert bool(cell), "функция bool для объекта класса Cell вернула неверное значение"
+cell.value = 1
+assert bool(cell) == False, "функция bool для объекта класса Cell вернула неверное значение"
+
+assert hasattr(TicTacToe, 'show') and hasattr(TicTacToe, 'human_go') and hasattr(TicTacToe,
+                                                                                 'computer_go'), "класс TicTacToe должен иметь методы show, human_go, computer_go"
+
+game = TicTacToe()
+assert bool(game), "функция bool вернула неверное значения для объекта класса TicTacToe"
+assert game[0, 0] == 0 and game[2, 2] == 0, "неверные значения ячеек, взятые по индексам"
+game[1, 1] = TicTacToe.HUMAN_X
+assert game[1, 1] == TicTacToe.HUMAN_X, "неверно работает оператор присваивания нового значения в ячейку игрового поля"
+
+game[0, 0] = TicTacToe.COMPUTER_O
+assert game[
+           0, 0] == TicTacToe.COMPUTER_O, "неверно работает оператор присваивания нового значения в ячейку игрового поля"
+
+game.init()
+assert game[0, 0] == TicTacToe.FREE_CELL and game[
+    1, 1] == TicTacToe.FREE_CELL, "при инициализации игрового поля все клетки должны принимать значение из атрибута FREE_CELL"
+
+try:
+    game[3, 0] = 4
+except IndexError:
+    assert True
+else:
+    assert False, "не сгенерировалось исключение IndexError"
+
+game.init()
+assert game.is_human_win == False and game.is_computer_win == False and game.is_draw == False, "при инициализации игры атрибуты is_human_win, is_computer_win, is_draw должны быть равны False, возможно не пересчитывается статус игры при вызове метода init()"
+
+game[0, 0] = TicTacToe.HUMAN_X
+game[1, 1] = TicTacToe.HUMAN_X
+game[2, 2] = TicTacToe.HUMAN_X
+assert game.is_human_win and game.is_computer_win == False and game.is_draw == False, "некорректно пересчитываются атрибуты is_human_win, is_computer_win, is_draw. Возможно не пересчитывается статус игры в момент присвоения новых значения по индексам: game[i, j] = value"
+
+game.init()
+game[0, 0] = TicTacToe.COMPUTER_O
+game[1, 0] = TicTacToe.COMPUTER_O
+game[2, 0] = TicTacToe.COMPUTER_O
+assert game.is_human_win == False and game.is_computer_win == False and game.is_draw == False, "некорректно пересчитываются атрибуты is_human_win, is_computer_win, is_draw. Возможно не пересчитывается статус игры в момент присвоения новых значения по индексам: game[i, j] = value"
