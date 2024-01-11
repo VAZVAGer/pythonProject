@@ -51,7 +51,7 @@ class TicTacToe:
                 elif zn.value == self.HUMAN_X:
                     show_pole[X][Y].append("X")
                 elif zn.value == self.COMPUTER_O:
-                    show_pole[X][Y].append("0")
+                    show_pole[X][Y].append("O")
         for LINE in show_pole:
             print(LINE)
         return show_pole
@@ -232,4 +232,4 @@ game.init()
 game[0, 0] = TicTacToe.COMPUTER_O
 game[1, 0] = TicTacToe.COMPUTER_O
 game[2, 0] = TicTacToe.COMPUTER_O
-assert game.is_human_win == False and game.is_computer_win == False and game.is_draw == False, "некорректно пересчитываются атрибуты is_human_win, is_computer_win, is_draw. Возможно не пересчитывается статус игры в момент присвоения новых значения по индексам: game[i, j] = value"
+assert game.is_human_win == False and game.is_computer_win and game.is_draw == False, "некорректно пересчитываются атрибуты is_human_win, is_computer_win, is_draw. Возможно не пересчитывается статус игры в момент присвоения новых значения по индексам: game[i, j] = value"
