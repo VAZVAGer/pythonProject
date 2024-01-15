@@ -17,9 +17,12 @@ class Thing:
 
 class Table(Thing):
     def __init__(self, name, price, weight, dims):
-        super().__init__(name, price, weight, dims)
-
+        super().__init__(name, price)
+        self. weight = weight
+        self.dims = dims
 
 class ElBook(Thing):
     def __init__(self, name, price, memory, frm):
-        super().__init__(name, price, memory, frm)
+        super().__init__(name, price)
+        self.memory = memory
+        self.frm = frm
