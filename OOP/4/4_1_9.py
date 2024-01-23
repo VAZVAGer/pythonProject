@@ -6,11 +6,14 @@ class Layer:
     def __call__(self, leyer, *args, **kwargs):
         self.next_layer = leyer
         return leyer
+
+
 class Input(Layer):
     def __init__(self, inputs):
         super().__init__()
         self.inputs = inputs
         self.name = 'Input'
+
 
 class Dense(Layer):
     def __init__(self, inputs, outputs, activation):
@@ -19,6 +22,7 @@ class Dense(Layer):
         self.inputs = inputs
         self.outputs = outputs
         self.activation = activation
+
 
 class NetworkIterator:
     def __init__(self, data):
@@ -29,7 +33,6 @@ class NetworkIterator:
         while layer:
             yield layer
             layer = layer.next_layer
-
 
 
 nt = Input(12)
